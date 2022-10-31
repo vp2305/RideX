@@ -7,4 +7,7 @@
     <string name="sign_in_text">Sign In</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="need_to_signUp_text">Don\'t have an account yet?</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+
 </resources>

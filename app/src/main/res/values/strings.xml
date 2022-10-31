@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">RideX</string>
     <string name="action_settings">Settings</string>
-
     <string name="email_text">Email Address</string>
     <string name="password_text">Password</string>
+    <string name="firstName_text">First Name</string>
+    <string name="lastName_text">Last Name</string>
     <string name="sign_in_text">Sign In</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="need_to_signUp_text">Don\'t have an account yet?</string>
+    <string name="need_to_signIn_text">Have an account already?</string>
     <string name="sign_up_text">Sign Up</string>
     <string name="sign_up_with_google">Sign up with Google</string>
 

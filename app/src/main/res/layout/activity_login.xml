@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.122" />
 
     <TextView
         android:id="@+id/app_slogan"
@@ -27,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-
         />
 
     <LinearLayout
@@ -148,6 +147,15 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             />
+
+        <Button
+            android:id="@+id/signUp_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_gravity="center"
+            android:onClick="signUpBtnTransition"
+            android:text="Sign Up" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

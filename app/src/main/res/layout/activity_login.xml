@@ -155,6 +155,7 @@
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:onClick="signUpBtnTransition"
+            android:textColor="@color/white"
             android:text="Sign Up" />
 
     </LinearLayout>

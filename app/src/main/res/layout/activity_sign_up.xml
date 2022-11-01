@@ -216,6 +216,7 @@
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:onClick="signInBtnTransition"
+            android:textColor="@color/white"
             android:text="@string/sign_in_text" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

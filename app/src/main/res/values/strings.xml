@@ -11,7 +11,5 @@
     <string name="need_to_signIn_text">Have an account already?</string>
     <string name="sign_up_text">Sign Up</string>
     <string name="sign_up_with_google">Sign up with Google</string>
-    <string name="profile_picture_title">Profile Picture</string>
-    <string name="profile_picture_description">Make sure to include your face in order to verify the profile.</string>
-    <string name="upload_existing_image">Upload existing image:</string>
+
 </resources>

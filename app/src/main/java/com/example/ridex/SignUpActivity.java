@@ -1,8 +1,13 @@
 package com.example.ridex;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpBtn = findViewById(R.id.signUp_btn);
         signUpWithGoogleBtn = findViewById(R.id.signUp_with_google_btn);
         // End of the reference for all the variable.
+
     }
 
     public void signUpBtnListener(View view) {
@@ -49,11 +55,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void signUpWithGoogleBtnListener(View view){
         // Clicked on the sign up with google btn
+        Toast.makeText(getApplicationContext(), "Sign up with Google!",
+                Toast.LENGTH_SHORT).show();
     }
 
     public void signInBtnTransition(View view){
         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-
 }

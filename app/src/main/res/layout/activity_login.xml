@@ -86,8 +86,8 @@
         <Button
             android:id="@+id/signIn_btn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/blue"
             android:onClick="signInBtnListener"
             android:text="@string/sign_in_text"
@@ -129,7 +129,7 @@
         <Button
             android:id="@+id/signIn_with_google_btn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_gravity="center"
             android:backgroundTint="@color/blue"
             android:drawableLeft="@drawable/google"
@@ -150,8 +150,8 @@
 
         <Button
             android:id="@+id/signUp_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="55dp"
             android:textAllCaps="false"
             android:layout_gravity="center"
             android:onClick="signUpBtnTransition"

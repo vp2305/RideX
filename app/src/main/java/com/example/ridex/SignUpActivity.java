@@ -45,6 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
         if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty()
                 && !password.isEmpty()){
             // Provided all the information.
+            Intent intent = new Intent(SignUpActivity.this, HomePageActivity.class);
+            startActivity(intent);
         }
         else {
             Toast.makeText(getApplicationContext(),

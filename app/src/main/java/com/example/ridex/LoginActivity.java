@@ -32,7 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         String emailInputText = emailInput.getText().toString();
         String passwordInputText = passInput.getText().toString();
         if (!emailInputText.isEmpty() && !passwordInputText.isEmpty()) {
-
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
         }

@@ -21,6 +21,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -31,6 +33,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 public class ProfilePictureActivity extends AppCompatActivity {
     PreviewView previewView;
@@ -76,12 +79,11 @@ public class ProfilePictureActivity extends AppCompatActivity {
     }
 
     private void bindPreview(ProcessCameraProvider cameraProvider) {
-
         imageCapture = new ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                .setTargetAspectRatio(AspectRatio.RATIO_16_9).build();
+                .setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(Surface.ROTATION_90).build();
 
-        Preview preview = new Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9)
+        Preview preview = new Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(Surface.ROTATION_90)
                 .build();
 
         CameraSelector cameraSelector = new CameraSelector.Builder()
@@ -94,8 +96,9 @@ public class ProfilePictureActivity extends AppCompatActivity {
 
     public void profilePhotoClick(View view){
         // Take the profile picture.
+        Executor mainExecutor = ContextCompat.getMainExecutor(getApplicationContext());
         Toast.makeText(getApplicationContext(), "Clicked on taking the photo", Toast.LENGTH_SHORT).show();
-        imageCapture.takePicture(null, new ImageCapture.OnImageCapturedCallback(){
+        imageCapture.takePicture(mainExecutor, new ImageCapture.OnImageCapturedCallback(){
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 super.onCaptureSuccess(image);
@@ -105,6 +108,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
                 buffer.get(bytes);
                 Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
                 imageView.setImageBitmap(bitmapImage);
+                image.close();
             }
 
             @Override

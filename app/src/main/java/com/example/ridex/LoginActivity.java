@@ -2,6 +2,7 @@ package com.example.ridex;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,12 +34,17 @@ public class LoginActivity extends AppCompatActivity {
         if (!emailInputText.isEmpty() && !passwordInputText.isEmpty()) {
 
         } else {
-            Toast.makeText(getApplicationContext(), "Email and password cannot be empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void signInWithGoogleBtnListener(View view){
         // User clicked on the sign in with google btn
         Toast.makeText(getApplicationContext(), "Sign in with google is pressed!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void signUpBtnTransition(View view){
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivity(intent);
     }
 }

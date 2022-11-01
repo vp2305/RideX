@@ -18,4 +18,6 @@
     <string name="search_text">Search as:</string>
     <string name="profile_picture_title">Profile Picture</string>
     <string name="profile_picture_description">Make sure to include your face in order to verify the profile.</string>
+    <string name="upload_existing_image">Upload existing image:</string>
+    <string name="profile_previewPicture_text">Preview of the profile picture:</string>
 </resources>

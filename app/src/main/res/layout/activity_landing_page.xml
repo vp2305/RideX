@@ -7,38 +7,44 @@
     android:id="@+id/myLayout"
     tools:context=".LandingPageActivity">
 
+    <!--    android:inAnimation="@android:anim/slide_in_left"-->
+<!--    android:outAnimation="@android:anim/slide_out_right"-->
+
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
         android:src="@drawable/logo_formatter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageSwitcher
         android:id="@+id/imageSwitcher"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-<!--    android:inAnimation="@android:anim/slide_in_left"-->
-<!--    android:outAnimation="@android:anim/slide_out_right"-->
+        android:layout_height="450dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_height="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
         android:text="Get Started"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/imageSwitcher" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSwitcher"
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

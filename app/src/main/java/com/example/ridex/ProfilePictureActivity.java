@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,6 +43,8 @@ public class ProfilePictureActivity extends AppCompatActivity {
     ImageButton profileClickBtn;
     Bitmap photoBitmap;
     ImageCapture imageCapture;
+    Button continueBtn, uploadBtn;
+    ImageView imageView;
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private int REQUEST_CAMERA = 3;
@@ -51,12 +55,14 @@ public class ProfilePictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_picture);
         previewView = findViewById(R.id.previewView);
         profileClickBtn = findViewById(R.id.profile_click);
+        imageView = findViewById(R.id.profilePictureViewImage);
+        continueBtn = findViewById(R.id.profileContinueBtn);
+        uploadBtn = findViewById(R.id.profileUploadBtn);
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-
                 bindPreview(cameraProvider);
             } catch (ExecutionException | InterruptedException e) {
                 // No errors need to be handled for this Future.
@@ -80,10 +86,10 @@ public class ProfilePictureActivity extends AppCompatActivity {
 
     private void bindPreview(ProcessCameraProvider cameraProvider) {
         imageCapture = new ImageCapture.Builder()
-                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-                .setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(Surface.ROTATION_90).build();
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+                .setTargetAspectRatio(AspectRatio.RATIO_4_3).setTargetRotation(Surface.ROTATION_180).build();
 
-        Preview preview = new Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).setTargetRotation(Surface.ROTATION_90)
+        Preview preview = new Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_4_3).setTargetRotation(Surface.ROTATION_180)
                 .build();
 
         CameraSelector cameraSelector = new CameraSelector.Builder()
@@ -97,12 +103,12 @@ public class ProfilePictureActivity extends AppCompatActivity {
     public void profilePhotoClick(View view){
         // Take the profile picture.
         Executor mainExecutor = ContextCompat.getMainExecutor(getApplicationContext());
-        Toast.makeText(getApplicationContext(), "Clicked on taking the photo", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "Clicked on taking the photo", Toast.LENGTH_SHORT).show();
         imageCapture.takePicture(mainExecutor, new ImageCapture.OnImageCapturedCallback(){
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 super.onCaptureSuccess(image);
-                ImageView imageView = findViewById(R.id.imageView2);
+                ImageView imageView = findViewById(R.id.profilePictureViewImage);
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] bytes = new byte[buffer.capacity()];
                 buffer.get(bytes);
@@ -110,11 +116,15 @@ public class ProfilePictureActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmapImage);
                 image.close();
             }
-
             @Override
             public void onError(@NonNull ImageCaptureException exception) {
                 super.onError(exception);
             }
         });
+    }
+
+    public void continueBtnListener(View view){
+        Intent intent = new Intent(ProfilePictureActivity.this, HomePageActivity.class);
+        startActivity(intent);
     }
 }

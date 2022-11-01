@@ -9,5 +9,10 @@
     <string name="need_to_signUp_text">Don\'t have an account yet?</string>
     <string name="sign_up_text">Sign Up</string>
     <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="choose">Choose</string>
+    <string name="your_route">your Route</string>
+    <string name="from_text">From</string>
+    <string name="to_text">To</string>
+    <string name="search_text">Search as:</string>
 
 </resources>

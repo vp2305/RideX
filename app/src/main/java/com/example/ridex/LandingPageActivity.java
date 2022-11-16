@@ -5,13 +5,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 public class LandingPageActivity extends AppCompatActivity {
 
@@ -23,7 +27,9 @@ public class LandingPageActivity extends AppCompatActivity {
     //for swipe gesture
     ConstraintLayout myLayout;
     SwipeListener swipeListener;
-
+    LottieAnimationView carAnimation;
+    ImageView bground;
+    TextView welcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,14 @@ public class LandingPageActivity extends AppCompatActivity {
         getStartedBtn = findViewById(R.id.getStartedButton);
         imageSwitcher = findViewById(R.id.imageSwitcher);
         myLayout = findViewById(R.id.myLayout);
-
+        carAnimation = findViewById(R.id.carAnimation);
         swipeListener = new SwipeListener(myLayout);
+        bground = findViewById(R.id.bground);
+        welcome = findViewById(R.id.welcome);
+
+        //animate the background
+        bground.animate().translationY(-1800).setDuration(800).setStartDelay(1000);
+        welcome.animate().translationY(-500).setDuration(800).setStartDelay(1000);
 
         //set default view
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -46,6 +58,16 @@ public class LandingPageActivity extends AppCompatActivity {
                 return imageView;
             }
         });
+
+
+
+//        getStartedBtn.setVisibility(View.GONE);
+//        getStartedBtn.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getStartedBtn.setVisibility(View.VISIBLE);
+//            }
+//        },500);
 
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override

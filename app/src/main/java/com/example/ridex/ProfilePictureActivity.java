@@ -104,7 +104,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         // Take the profile picture.
         Executor mainExecutor = ContextCompat.getMainExecutor(getApplicationContext());
 //        Toast.makeText(getApplicationContext(), "Clicked on taking the photo", Toast.LENGTH_SHORT).show();
-        imageCapture.takePicture(mainExecutor, new ImageCapture.OnImageCapturedCallback(){
+        imageCapture.takePicture(mainExecutor, new OnImageCapturedCallback(){
             @Override
             public void onCaptureSuccess(@NonNull ImageProxy image) {
                 super.onCaptureSuccess(image);

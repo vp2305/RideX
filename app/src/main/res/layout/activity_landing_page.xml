@@ -7,8 +7,6 @@
     android:id="@+id/myLayout"
     tools:context=".LandingPageActivity">
 
-
-
 <!--    <ImageView-->
 <!--        android:id="@+id/logo"-->
 <!--        android:layout_width="match_parent"-->
@@ -19,11 +17,6 @@
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-
-
-
 
     <ImageSwitcher
         android:id="@+id/imageSwitcher"
@@ -77,6 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome!"
+        android:background="@drawable/transparent_drawable"
+        android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

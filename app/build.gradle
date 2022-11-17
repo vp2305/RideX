@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
 }
-
+apply plugin: "realm-android"
 android {
     compileSdk 32
 
@@ -11,7 +11,7 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "RealmAppId", "\"ridex-application-endzs\""
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,10 +28,15 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.example.ridex'
+}
+realm {
+    syncEnabled=true
 }
 
 dependencies {
-
+    implementation 'io.realm:realm-gradle-plugin:10.11.1'
+    implementation 'com.google.guava:guava:29.0-android'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'

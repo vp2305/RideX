@@ -4,13 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.Credentials;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+
+public class LoginActivity extends AppCompatActivity {
+    private final static String ACTIVITY_NAME = "LoginActivity";
     EditText emailInput, passInput;
     Button signInBtn, signInWithGoogleBtn;
 
@@ -29,11 +41,27 @@ public class LoginActivity extends AppCompatActivity {
 
     public void signInBtnListener(View view){
         // User clicked on the sign in btn
-        String emailInputText = emailInput.getText().toString();
+        String emailInputText = emailInput.getText().toString().toLowerCase();
+        Log.i(ACTIVITY_NAME, "Email: "+ emailInputText);
         String passwordInputText = passInput.getText().toString();
         if (!emailInputText.isEmpty() && !passwordInputText.isEmpty()) {
-            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            startActivity(intent);
+            // TODO: Implement processing. Progress.
+            App app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
+            Credentials credentials = Credentials.emailPassword(emailInputText, passwordInputText);
+            // Credentials credentials = Credentials.anonymous();
+            app.loginAsync(credentials, result -> {
+                if (result.isSuccess()) {
+                    User user = app.currentUser();
+
+                    assert user != null;
+                    Log.i(ACTIVITY_NAME, "User: " + user.getProfile());
+//                    Toast.makeText(getApplicationContext(), "Successfully authenticated!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Invalid password or email address. Please try again!", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
         }

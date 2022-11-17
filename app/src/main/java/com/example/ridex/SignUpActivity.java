@@ -1,20 +1,28 @@
 package com.example.ridex;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.Credentials;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+
 public class SignUpActivity extends AppCompatActivity {
+    private final static String ACTIVITY_NAME = "SignUpActivity";
 
     EditText firstNameInputField, lastNameInputField, emailAddressInputField, passwordInputField;
     Button signUpBtn, signUpWithGoogleBtn;
@@ -39,14 +47,48 @@ public class SignUpActivity extends AppCompatActivity {
         // Clicked on the sign up btn
         String firstName = firstNameInputField.getText().toString();
         String lastName = lastNameInputField.getText().toString();
-        String email = emailAddressInputField.getText().toString();
+        String email = emailAddressInputField.getText().toString().toLowerCase();
         String password = passwordInputField.getText().toString();
 
         if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty()
                 && !password.isEmpty()){
             // Provided all the information.
-            Intent intent = new Intent(SignUpActivity.this, ProfilePictureActivity.class);
-            startActivity(intent);
+
+            App app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
+            app.getEmailPassword().registerUserAsync(email.toLowerCase(), password, result -> {
+                if (result.isSuccess()){
+                    Toast.makeText(getApplicationContext(), "Successfully signed up!", Toast.LENGTH_SHORT).show();
+                    // Log the newly signed up user!
+                    Credentials credentials = Credentials.emailPassword(email, password);
+                    app.loginAsync(credentials, result1 -> {
+                        if (result1.isSuccess()){
+                            User user = app.currentUser();
+
+                            MongoClient mongoClient = user.getMongoClient(MongoDb.mongoClient);
+                            MongoDatabase mongoDatabase = mongoClient.getDatabase(MongoDb.databaseName);
+                            MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(MongoDb.usersCollection);
+
+                            mongoCollection.insertOne(new Document("_id", new ObjectId(user.getId()))
+                                    .append("firstName", firstName)
+                                    .append("lastName", lastName)
+                                    .append("email", email)
+                                    .append("uid", user.getId())).getAsync(insertResult -> {
+                                if (insertResult.isSuccess()){
+                                    Intent intent = new Intent(SignUpActivity.this, ProfilePictureActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Log.i(ACTIVITY_NAME, "Error: "+ insertResult.getError());
+                                }
+                            });
+                        }
+                        else {
+                            Log.i(ACTIVITY_NAME, "Unable to login after signing up! " + result1.getError());
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "A user with this email address is already signed up!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         else {
             Toast.makeText(getApplicationContext(),

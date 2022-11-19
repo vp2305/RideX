@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:id="@+id/myLayout"
     tools:context=".LandingPageActivity">
 
@@ -22,7 +23,7 @@
         android:id="@+id/imageSwitcher"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

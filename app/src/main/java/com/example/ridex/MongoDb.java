@@ -12,6 +12,7 @@ public class MongoDb extends Application {
     public final static String mongoClient = "mongodb-atlas";
     public final static String databaseName = "rideX";
     public final static String usersCollection = "Users";
+    public final static String realmName = "rideX.realm";
 
     // Public Key: nmoluriz
     // Private Key: 6170a1e8-c362-4412-aa79-c18b38af11c7
@@ -19,13 +20,29 @@ public class MongoDb extends Application {
     // Download via realm-cli: realm-cli pull --remote ridex-application-endzs --template kotlin.todo.flex
     // Follow README: RideX-Application/frontend/kotlin.todo.flex/README.md
 
+    // This is for opening a realm
+    // RealmConfiguration config = new RealmConfiguration.Builder().name(MongoDb.realmName).build();
+    // Realm backgroundThreadRealm = Realm.getInstance(config);
+
     @Override
     public void onCreate() {
         super.onCreate();
         Log.i(ACTIVITY_NAME, "OnCreate()");
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name("rideX.realm").schemaVersion(0).build();
+                .name(realmName).schemaVersion(0).build();
         Realm.setDefaultConfiguration(realmConfiguration);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Log.i(ACTIVITY_NAME, "onLowMemory()");
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        Log.i(ACTIVITY_NAME, "onTerminate()");
     }
 }

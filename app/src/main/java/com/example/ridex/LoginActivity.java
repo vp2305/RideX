@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void signInBtnListener(View view){
         // User clicked on the sign in btn
-        String emailInputText = emailInput.getText().toString().toLowerCase();
+        String emailInputText = emailInput.getText().toString().toLowerCase().replaceAll(" ", "");
         Log.i(ACTIVITY_NAME, "Email: "+ emailInputText);
         String passwordInputText = passInput.getText().toString();
         if (!emailInputText.isEmpty() && !passwordInputText.isEmpty()) {
@@ -75,5 +75,29 @@ public class LoginActivity extends AppCompatActivity {
     public void signUpBtnTransition(View view){
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(ACTIVITY_NAME, "onPause()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(ACTIVITY_NAME, "onResume()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(ACTIVITY_NAME, "onDestroy()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(ACTIVITY_NAME, "onStart()");
     }
 }

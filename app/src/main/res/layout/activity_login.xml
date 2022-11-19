@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -59,6 +60,7 @@
             android:background="@drawable/input_text_select"
             android:ems="20"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:textCursorDrawable="@drawable/color_cursor" />
@@ -81,6 +83,7 @@
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:textColor="@color/black"
             android:textCursorDrawable="@drawable/color_cursor" />
 
         <Button

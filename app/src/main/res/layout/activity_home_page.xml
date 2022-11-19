@@ -3,18 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
+    android:background="@color/white"
     tools:context=".HomePageActivity"
 
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
         <TextView
-            android:id="@+id/home_page_text"
+            android:id="@+id/greeting_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -93,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:paddingRight="10dp">
 
 <!--                This is for the from and to destinations-->
@@ -143,7 +146,6 @@
                 android:gravity="center"
                 android:text="@string/search_text"
                 android:layout_marginRight="10dp"
-
                 />
 
             <FrameLayout
@@ -151,12 +153,16 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/spinner_background"
                 android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="20dp">
             <Spinner
                 android:id="@+id/dropdown_option"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:popupBackground="@color/white"
                 android:layout_weight="1"
+                android:entries="@array/searchUserDropdown"
                 />
             </FrameLayout>
 
@@ -165,6 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Search"
+                android:textColor="@color/white"
                 android:textAllCaps="false"/>
 
         </LinearLayout>

@@ -38,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 public class ProfilePictureActivity extends AppCompatActivity {
+    private final static String ACTIVITY_NAME = "ProfilePictureActivity";
     PreviewView previewView;
     Camera currCamera;
     ImageButton profileClickBtn;
@@ -74,6 +75,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i(ACTIVITY_NAME, "onStart()");
         if (ContextCompat.checkSelfPermission(ProfilePictureActivity.this,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
@@ -82,6 +84,24 @@ public class ProfilePictureActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, REQUEST_CAMERA);
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(ACTIVITY_NAME, "onPause()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(ACTIVITY_NAME, "onResume()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(ACTIVITY_NAME, "onDestroy()");
     }
 
     private void bindPreview(ProcessCameraProvider cameraProvider) {
@@ -127,4 +147,6 @@ public class ProfilePictureActivity extends AppCompatActivity {
         Intent intent = new Intent(ProfilePictureActivity.this, HomePageActivity.class);
         startActivity(intent);
     }
+
+
 }

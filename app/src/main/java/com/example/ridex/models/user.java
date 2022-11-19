@@ -6,11 +6,12 @@ import io.realm.annotations.Required;
 
 import org.bson.types.ObjectId;
 
-public class Users extends RealmObject {
+public class user extends RealmObject {
     @PrimaryKey
     @Required
     private ObjectId _id;
 
+    @Required
     private String email;
 
     @Required

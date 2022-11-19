@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,9 +18,13 @@ import android.widget.ViewSwitcher;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.User;
+
 public class LandingPageActivity extends AppCompatActivity {
 
-
+    private static final String ACTIVITY_NAME = "LandingPageActivity";
     Button getStartedBtn;
     ImageSwitcher imageSwitcher;
     private int position = 0;
@@ -34,6 +39,7 @@ public class LandingPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkIfSignedIn();
         setContentView(R.layout.activity_landing_page);
 
         getStartedBtn = findViewById(R.id.getStartedButton);
@@ -54,12 +60,9 @@ public class LandingPageActivity extends AppCompatActivity {
             public View makeView() {
                 ImageView imageView = new ImageView(LandingPageActivity.this);
                 imageView.setImageResource(image[position]);
-
                 return imageView;
             }
         });
-
-
 
 //        getStartedBtn.setVisibility(View.GONE);
 //        getStartedBtn.postDelayed(new Runnable() {
@@ -73,9 +76,44 @@ public class LandingPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LandingPageActivity.this, LoginActivity.class);
+                intent.putExtra("initiallyLoaded", String.valueOf(true));
                 startActivity(intent);
             }
         });
+    }
+
+    private void checkIfSignedIn(){
+        App app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
+        User user = app.currentUser();
+        if (user != null){
+            Log.i(ACTIVITY_NAME, "The user is already logged in!");
+            Intent intent = new Intent(LandingPageActivity.this, HomePageActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(ACTIVITY_NAME, "onPause()");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(ACTIVITY_NAME, "onResume()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(ACTIVITY_NAME, "onDestroy()");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(ACTIVITY_NAME, "onStart()");
     }
 
     private class SwipeListener implements View.OnTouchListener {

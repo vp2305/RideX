@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     assert user != null;
                     Log.i(ACTIVITY_NAME, "User: " + user.getProfile());
 //                    Toast.makeText(getApplicationContext(), "Successfully authenticated!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid password or email address. Please try again!", Toast.LENGTH_SHORT).show();

@@ -87,7 +87,7 @@ public class LandingPageActivity extends AppCompatActivity {
         User user = app.currentUser();
         if (user != null){
             Log.i(ACTIVITY_NAME, "The user is already logged in!");
-            Intent intent = new Intent(LandingPageActivity.this, HomePageActivity.class);
+            Intent intent = new Intent(LandingPageActivity.this, MainActivity.class);
             startActivity(intent);
         }
     }

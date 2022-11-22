@@ -77,29 +77,27 @@ public class HomePageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-//
-//        app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
-//        SyncConfiguration configuration =
-//                new SyncConfiguration.Builder(Objects.requireNonNull(app.currentUser()))
-//                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
-//                            @Override
-//                            public void configure(@NonNull Realm realm,
-//                                                  @NonNull MutableSubscriptionSet subscriptions) {
-//                                // Add a subscription with a name
-//                                subscriptions.addOrUpdate(Subscription.create("userQuery",
-//                                        realm.where(user.class)
-//                                                .equalTo("uid", app.currentUser().getId())
-//                                ));
-//                            }
-//                        })
-//                        .build();
 
-        //Realm realm = Realm.getInstance(configuration);
+        app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
+        SyncConfiguration configuration =
+                new SyncConfiguration.Builder(Objects.requireNonNull(app.currentUser()))
+                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
+                            @Override
+                            public void configure(@NonNull Realm realm,
+                                                  @NonNull MutableSubscriptionSet subscriptions) {
+                                // Add a subscription with a name
+                                subscriptions.addOrUpdate(Subscription.create("userQuery",
+                                        realm.where(user.class)
+                                                .equalTo("uid", app.currentUser().getId())
+                                ));
+                            }
+                        })
+                        .build();
 
-//        currUserInfo = realm.where(user.class)
-//                .equalTo("uid", app.currentUser().getId()).findFirst();
+        Realm realm = Realm.getInstance(configuration);
 
-
+        currUserInfo = realm.where(user.class)
+                .equalTo("uid", app.currentUser().getId()).findFirst();
 
     }
 
@@ -117,45 +115,48 @@ public class HomePageFragment extends Fragment {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),
-                        AccountActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(),
+//                        AccountActivity.class);
+//                startActivity(intent);
             }
         });
 
-//        userListener = (changedUser, changeSet) -> {
-//            if (changeSet.isDeleted()){
-//                Log.i(ACTIVITY_NAME, "User is deleted!");
-//                Toast.makeText(view.getContext(),
-//                        "There is seems to be some problem with your account!",
-//                        Toast.LENGTH_SHORT).show();
-//                app.currentUser().logOutAsync(result -> {
-//                    if (result.isSuccess()){
-//                        Intent intent = new Intent(getActivity(),
-//                                LoginActivity.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//            }
-//
-//            for (String fieldName : changeSet.getChangedFields()){
-//                Log.i(ACTIVITY_NAME, "Field '" + fieldName + "' changed.");
-//                switch (fieldName) {
-//                    case "lastName":
-//                    case "firstName":
-//                        greetingText.setText(String.format("Hello, %s %s",
-//                                currUserInfo.getFirstName(), currUserInfo.getLastName()));
-//                        break;
-//                    case "email":
-//                        Log.i(ACTIVITY_NAME, "Email is changed!");
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        };
-//        currUserInfo.addChangeListener(userListener);
-//
+        userListener = (changedUser, changeSet) -> {
+            if (changeSet.isDeleted()){
+                Log.i(ACTIVITY_NAME, "User is deleted!");
+                Toast.makeText(view.getContext(),
+                        "There is seems to be some problem with your account!",
+                        Toast.LENGTH_SHORT).show();
+                app.currentUser().logOutAsync(result -> {
+                    if (result.isSuccess()){
+                        Intent intent = new Intent(getActivity(),
+                                LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            for (String fieldName : changeSet.getChangedFields()){
+                Log.i(ACTIVITY_NAME, "Field '" + fieldName + "' changed.");
+                switch (fieldName) {
+                    case "lastName":
+                    case "firstName":
+                        greetingText.setText(String.format("Hello, %s %s",
+                                currUserInfo.getFirstName(), currUserInfo.getLastName()));
+                        break;
+                    case "email":
+                        Log.i(ACTIVITY_NAME, "Email is changed!");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        currUserInfo.addChangeListener(userListener);
+
+        greetingText.setText(String.format("Hello, %s %s",
+                currUserInfo.getFirstName(), currUserInfo.getLastName()));
+
 //        // Inflate the layout for this fragment
         return view;
     }

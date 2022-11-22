@@ -1,5 +1,7 @@
 package com.example.ridex.models;
 
+import android.os.Parcelable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;

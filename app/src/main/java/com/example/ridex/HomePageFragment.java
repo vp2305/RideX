@@ -42,6 +42,7 @@ public class HomePageFragment extends Fragment {
     user currUserInfo;
     ImageButton profileBtn;
     RealmObjectChangeListener<user> userListener;
+    App app;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,45 +77,28 @@ public class HomePageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        App app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
-        SyncConfiguration configuration =
-                new SyncConfiguration.Builder(Objects.requireNonNull(app.currentUser()))
-                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
-                            @Override
-                            public void configure(@NonNull Realm realm,
-                                                  @NonNull MutableSubscriptionSet subscriptions) {
-                                // Add a subscription with a name
-                                subscriptions.addOrUpdate(Subscription.create("userQuery",
-                                        realm.where(user.class)
-                                                .equalTo("uid", app.currentUser().getId())
-                                ));
-                            }
-                        })
-                        .build();
-
-        Realm realm = Realm.getInstance(configuration);
-
-
-
-        currUserInfo = realm.where(user.class)
-                .equalTo("uid", app.currentUser().getId()).findFirst();
-
-        currUserInfo.addChangeListener(userListener);
-
-//        // Get all the field
-//        greetingText = findViewById(R.id.greeting_text);
-//        profileBtn = findViewById(R.id.home_page_profile_btn);
-//        // End of all the field collection
 //
-//        profileBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Intent intent = new Intent(HomePageActivity.this,
-//                        //AccountActivity.class);
-//                //startActivity(intent);
-//            }
-//        });
+//        app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
+//        SyncConfiguration configuration =
+//                new SyncConfiguration.Builder(Objects.requireNonNull(app.currentUser()))
+//                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
+//                            @Override
+//                            public void configure(@NonNull Realm realm,
+//                                                  @NonNull MutableSubscriptionSet subscriptions) {
+//                                // Add a subscription with a name
+//                                subscriptions.addOrUpdate(Subscription.create("userQuery",
+//                                        realm.where(user.class)
+//                                                .equalTo("uid", app.currentUser().getId())
+//                                ));
+//                            }
+//                        })
+//                        .build();
+
+        //Realm realm = Realm.getInstance(configuration);
+
+//        currUserInfo = realm.where(user.class)
+//                .equalTo("uid", app.currentUser().getId()).findFirst();
+
 
 
     }
@@ -123,42 +107,56 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view  = inflater.inflate(R.layout.fragment_home_page, container, false);
 
-        userListener = (changedUser, changeSet) -> {
-            if (changeSet.isDeleted()){
-                Log.i(ACTIVITY_NAME, "User is deleted!");
-                Toast.makeText(getApplicationContext(),
-                        "There is seems to be some problem with your account!",
-                        Toast.LENGTH_SHORT).show();
-                app.currentUser().logOutAsync(result -> {
-                    if (result.isSuccess()){
-                        Intent intent = new Intent(HomePageActivity.this,
-                                LoginActivity.class);
-                        startActivity(intent);
-                    }
-                });
+        // Get all the field
+        greetingText = view.findViewById(R.id.greeting_text);
+        profileBtn = view.findViewById(R.id.home_page_profile_btn);
+        // End of all the field collection
+
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),
+                        AccountActivity.class);
+                startActivity(intent);
             }
+        });
 
-            for (String fieldName : changeSet.getChangedFields()){
-                Log.i(ACTIVITY_NAME, "Field '" + fieldName + "' changed.");
-                switch (fieldName) {
-                    case "lastName":
-                    case "firstName":
-                        greetingText.setText(String.format("Hello, %s %s",
-                                currUserInfo.getFirstName(), currUserInfo.getLastName()));
-                        break;
-                    case "email":
-                        Log.i(ACTIVITY_NAME, "Email is changed!");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
+//        userListener = (changedUser, changeSet) -> {
+//            if (changeSet.isDeleted()){
+//                Log.i(ACTIVITY_NAME, "User is deleted!");
+//                Toast.makeText(view.getContext(),
+//                        "There is seems to be some problem with your account!",
+//                        Toast.LENGTH_SHORT).show();
+//                app.currentUser().logOutAsync(result -> {
+//                    if (result.isSuccess()){
+//                        Intent intent = new Intent(getActivity(),
+//                                LoginActivity.class);
+//                        startActivity(intent);
+//                    }
+//                });
+//            }
+//
+//            for (String fieldName : changeSet.getChangedFields()){
+//                Log.i(ACTIVITY_NAME, "Field '" + fieldName + "' changed.");
+//                switch (fieldName) {
+//                    case "lastName":
+//                    case "firstName":
+//                        greetingText.setText(String.format("Hello, %s %s",
+//                                currUserInfo.getFirstName(), currUserInfo.getLastName()));
+//                        break;
+//                    case "email":
+//                        Log.i(ACTIVITY_NAME, "Email is changed!");
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        };
+//        currUserInfo.addChangeListener(userListener);
+//
+//        // Inflate the layout for this fragment
+        return view;
     }
 }

@@ -57,7 +57,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
-                android:background="@drawable/rounded_edit_text"
+                android:background="@drawable/accent_bgcolor"
                 >
 
                 <TextView
@@ -65,6 +65,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/choose"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     />
 
                 <TextView
@@ -72,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/your_route"
                     android:textSize="15sp"
-                    android:textColor="#99000000"
+                    android:textColor="#BFFFFFFF"
                     android:layout_marginTop="2dp"/>
 
                 <LinearLayout
@@ -122,6 +123,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="17sp"
+                            android:textColor="@color/white"
                             android:text="@string/from_text" />
 
                         <EditText
@@ -132,7 +134,7 @@
                             android:inputType="textPersonName"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
-                            android:background="@drawable/input_text_select"/>
+                            android:background="@drawable/accent_input_text_select"/>
 
                         <TextView
                             android:id="@+id/to_text_view"
@@ -140,6 +142,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:textSize="17sp"
+                            android:textColor="@color/white"
                             android:text="@string/to_text" />
 
                         <EditText
@@ -150,7 +153,7 @@
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:inputType="textPersonName"
-                            android:background="@drawable/input_text_select"/>
+                            android:background="@drawable/accent_input_text_select"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -166,6 +169,7 @@
                         android:gravity="center"
                         android:text="@string/search_text"
                         android:textSize="17sp"
+                        android:textColor="@color/white"
                         android:layout_marginRight="10dp"
                         />
 

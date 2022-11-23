@@ -30,7 +30,7 @@ public class MongoDb extends Application {
         Log.i(ACTIVITY_NAME, "OnCreate()");
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name(realmName).schemaVersion(0).build();
+                .name(realmName).schemaVersion(1).build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 

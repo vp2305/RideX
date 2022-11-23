@@ -144,7 +144,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
     }
 
     public void continueBtnListener(View view){
-        Intent intent = new Intent(ProfilePictureActivity.this, HomePageActivity.class);
+        Intent intent = new Intent(ProfilePictureActivity.this, MainActivity.class);
         startActivity(intent);
     }
 

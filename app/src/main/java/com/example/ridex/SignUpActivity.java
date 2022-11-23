@@ -76,6 +76,11 @@ public class SignUpActivity extends AppCompatActivity {
                                     .append("firstName", firstName)
                                     .append("lastName", lastName)
                                     .append("email", email)
+                                    .append("currentlyTakingRide", false)
+                                    .append("numberOfRidesDriven", 0)
+                                    .append("numberOfRidesTaken", 0)
+                                    .append("overAllReview", 0)
+                                    .append("photoUrl","")
                                     .append("uid", user.getId())).getAsync(insertResult -> {
                                 if (insertResult.isSuccess()){
                                     Intent intent = new Intent(SignUpActivity.this, ProfilePictureActivity.class);

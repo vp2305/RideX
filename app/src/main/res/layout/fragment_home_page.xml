@@ -134,6 +134,7 @@
                             android:inputType="textPersonName"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textColor="@color/black"
                             android:background="@drawable/accent_input_text_select"/>
 
                         <TextView
@@ -152,6 +153,7 @@
                             android:ems="10"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:textColor="@color/black"
                             android:inputType="textPersonName"
                             android:background="@drawable/accent_input_text_select"/>
                     </LinearLayout>

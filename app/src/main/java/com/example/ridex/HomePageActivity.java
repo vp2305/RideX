@@ -7,30 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ridex.models.user;
+import com.example.ridex.models.Users;
 
 import java.util.Objects;
 
-import io.realm.OrderedCollectionChangeSet;
-import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmConfiguration;
-import io.realm.RealmModel;
 import io.realm.RealmObjectChangeListener;
-import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.User;
 import io.realm.mongodb.sync.MutableSubscriptionSet;
 import io.realm.mongodb.sync.Subscription;
 import io.realm.mongodb.sync.SyncConfiguration;
@@ -38,10 +28,10 @@ import io.realm.mongodb.sync.SyncConfiguration;
 public class HomePageActivity extends AppCompatActivity {
     private final static String ACTIVITY_NAME = "HomePageActivity";
     TextView greetingText;
-    user currUserInfo;
+    Users currUsersInfo;
     ImageButton profileBtn;
 
-    RealmObjectChangeListener<user> userListener;
+    RealmObjectChangeListener<Users> userListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +47,7 @@ public class HomePageActivity extends AppCompatActivity {
                                           @NonNull MutableSubscriptionSet subscriptions) {
                         // Add a subscription with a name
                         subscriptions.addOrUpdate(Subscription.create("userQuery",
-                                realm.where(user.class)
+                                realm.where(Users.class)
                                         .equalTo("uid", app.currentUser().getId())
                         ));
                     }
@@ -143,6 +133,6 @@ public class HomePageActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(ACTIVITY_NAME, "onDestroy()");
         // Clear out the listener
-        currUserInfo.removeChangeListener(userListener);
+        currUsersInfo.removeChangeListener(userListener);
     }
 }

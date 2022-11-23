@@ -3,8 +3,8 @@ package com.example.ridex;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +14,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ridex.models.user;
-
-import java.util.Objects;
+import com.example.ridex.models.Users;
 
 import io.realm.Realm;
 import io.realm.RealmObjectChangeListener;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.sync.MutableSubscriptionSet;
-import io.realm.mongodb.sync.Subscription;
 import io.realm.mongodb.sync.SyncConfiguration;
 
 /**
@@ -38,11 +34,18 @@ public class HomePageFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private final static String ACTIVITY_NAME = "HomePageFragment";
+
+    // Ui variables
     TextView greetingText;
-    user currUserInfo;
     ImageButton profileBtn;
-    RealmObjectChangeListener<user> userListener;
+
+    // Realm variables.
+    Users currUsersInfo;
+    Realm realm;
+    SyncConfiguration configuration;
+    RealmObjectChangeListener<Users> userListener;
     App app;
+//    SyncConfiguration configuration;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,37 +76,34 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        Log.i(ACTIVITY_NAME, "onCreate()");
 
         app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
-        SyncConfiguration configuration =
-                new SyncConfiguration.Builder(Objects.requireNonNull(app.currentUser()))
-                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
-                            @Override
-                            public void configure(@NonNull Realm realm,
-                                                  @NonNull MutableSubscriptionSet subscriptions) {
-                                // Add a subscription with a name
-                                subscriptions.addOrUpdate(Subscription.create("userQuery",
-                                        realm.where(user.class)
-                                                .equalTo("uid", app.currentUser().getId())
-                                ));
-                            }
-                        })
-                        .build();
-
-        Realm realm = Realm.getInstance(configuration);
-
-        currUserInfo = realm.where(user.class)
+//        configuration =
+//                new SyncConfiguration.Builder(app.currentUser())
+//                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
+//                            @Override
+//                            public void configure(@NonNull Realm realm,
+//                                                  @NonNull MutableSubscriptionSet subscriptions) {
+//                                // Add a subscription with a name
+//                                subscriptions.addOrUpdate(Subscription.create("userQuery",
+//                                        realm.where(user.class)
+//                                                .equalTo("uid", app.currentUser().getId())
+//                                ));
+//                            }
+//                        })
+//                        .build();
+        realm = MainActivity.getRealm(getActivity());
+//        realm = Realm.getInstance(configuration);
+        currUsersInfo = realm.where(Users.class)
                 .equalTo("uid", app.currentUser().getId()).findFirst();
-
+        Log.i(ACTIVITY_NAME, String.valueOf(currUsersInfo));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.i(ACTIVITY_NAME, "onCreateView()");
 
         View view  = inflater.inflate(R.layout.fragment_home_page, container, false);
 
@@ -115,9 +115,9 @@ public class HomePageFragment extends Fragment {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(),
-//                        AccountActivity.class);
-//                startActivity(intent);
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, new AccountPageFragment());
+                fragmentTransaction.commit();
             }
         });
 
@@ -142,7 +142,7 @@ public class HomePageFragment extends Fragment {
                     case "lastName":
                     case "firstName":
                         greetingText.setText(String.format("Hello, %s %s",
-                                currUserInfo.getFirstName(), currUserInfo.getLastName()));
+                                currUsersInfo.getFirstName(), currUsersInfo.getLastName()));
                         break;
                     case "email":
                         Log.i(ACTIVITY_NAME, "Email is changed!");
@@ -152,12 +152,30 @@ public class HomePageFragment extends Fragment {
                 }
             }
         };
-        currUserInfo.addChangeListener(userListener);
-
+        currUsersInfo.addChangeListener(userListener);
         greetingText.setText(String.format("Hello, %s %s",
-                currUserInfo.getFirstName(), currUserInfo.getLastName()));
+                currUsersInfo.getFirstName(), currUsersInfo.getLastName()));
 
-//        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(ACTIVITY_NAME, "onDestroy()");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(ACTIVITY_NAME, "onDestroyView()");
+        currUsersInfo.removeChangeListener(userListener);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i(ACTIVITY_NAME, "onDetach()");
     }
 }

@@ -6,6 +6,14 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:id="@+id/home"/>
     <item
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:id="@+id/search"/>
+    <item
+        android:title="Post"
+        android:icon="@drawable/ic_baseline_post_add_24"
+        android:id="@+id/post"/>
+    <item
         android:title="Inbox"
         android:icon="@drawable/ic_baseline_inbox_24"
         android:id="@+id/inbox"/>

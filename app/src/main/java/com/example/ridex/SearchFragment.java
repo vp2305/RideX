@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +24,7 @@ public class SearchFragment extends Fragment {
 
     //UI
     EditText fromEditText, toEditText;
-
+    TextView heading;
     //Data
     String fromLocation, toLocation;
 
@@ -71,6 +72,7 @@ public class SearchFragment extends Fragment {
         //get all fields
         fromEditText = view.findViewById(R.id.from_editText);
         toEditText = view.findViewById(R.id.to_editText);
+        heading = view.findViewById(R.id.heading);
 
         //if locations are passed
         if (getArguments()!=null){
@@ -78,6 +80,7 @@ public class SearchFragment extends Fragment {
             toLocation = getArguments().getString("toLocation");
             fromEditText.setText(fromLocation);
             toEditText.setText(toLocation);
+            heading.setText("Postings");
         }
 
 

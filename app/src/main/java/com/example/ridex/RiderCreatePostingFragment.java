@@ -49,9 +49,8 @@ public class RiderCreatePostingFragment extends Fragment {
     EditText fromLocation,
             toLocation,
             date,
-            time,
             postDescription;
-    Spinner seatsRequired;
+    Spinner seatsRequired, time;
     Button postBtn;
 
 
@@ -128,7 +127,7 @@ public class RiderCreatePostingFragment extends Fragment {
                         riderPost.setFromLocation(fromLocation.getText().toString());
                         riderPost.setToLocation(toLocation.getText().toString());
                         riderPost.setDate(date.getText().toString());
-                        riderPost.setTime(time.getText().toString());
+                        riderPost.setTime(time.getSelectedItem().toString());
                         riderPost.setNumberOfSeats(
                                 Integer.parseInt(seatsRequired.getSelectedItem().toString()));
                         riderPost.setPostDescription(postDescription.getText().toString());
@@ -142,7 +141,7 @@ public class RiderCreatePostingFragment extends Fragment {
                             fromLocation.setText("");
                             toLocation.setText("");
                             date.setText("");
-                            time.setText("");
+                            time.setSelection(0);
                             postDescription.setText("");
                             seatsRequired.setSelection(0);
                         }

@@ -43,13 +43,12 @@ public class DriverCreatePostingFragment extends Fragment {
     EditText fromLocation,
             toLocation,
             date,
-            time,
             carModel,
             carYear,
             licensePlate,
             carColor,
             postDescription;
-    Spinner seatsAvailable;
+    Spinner seatsAvailable, time;
     Button driverPostBtn;
 
     // MongoDB Variables
@@ -116,7 +115,6 @@ public class DriverCreatePostingFragment extends Fragment {
                 if (fromLocation.getText().toString().isEmpty() ||
                         toLocation.getText().toString().isEmpty() ||
                         date.getText().toString().isEmpty() ||
-                        time.getText().toString().isEmpty() ||
                         carModel.getText().toString().isEmpty() ||
                         carYear.getText().toString().isEmpty() ||
                         licensePlate.getText().toString().isEmpty() ||
@@ -139,7 +137,7 @@ public class DriverCreatePostingFragment extends Fragment {
                         driverPost.setFromLocation(fromLocation.getText().toString());
                         driverPost.setToLocation(toLocation.getText().toString());
                         driverPost.setDate(date.getText().toString());
-                        driverPost.setTime(time.getText().toString());
+                        driverPost.setTime(time.getSelectedItem().toString());
                         driverPost.setNumberOfSeats(
                                 Integer.parseInt(seatsAvailable.getSelectedItem().toString()));
                         driverPost.setAvailableSeats(
@@ -160,7 +158,7 @@ public class DriverCreatePostingFragment extends Fragment {
                             fromLocation.setText("");
                             toLocation.setText("");
                             date.setText("");
-                            time.setText("");
+                            time.setSelection(0);
                             carModel.setText("");
                             carYear.setText("");
                             licensePlate.setText("");

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import io.realm.RealmList;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
@@ -72,11 +73,15 @@ public class SignUpActivity extends AppCompatActivity {
                             MongoDatabase mongoDatabase = mongoClient.getDatabase(MongoDb.databaseName);
                             MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(MongoDb.usersCollection);
 
+                            RealmList<String> confirmedRide = new RealmList<>();
+                            confirmedRide.add("");
+
                             mongoCollection.insertOne(new Document("_id", new ObjectId(user.getId()))
                                     .append("firstName", firstName)
                                     .append("lastName", lastName)
                                     .append("email", email)
-                                    .append("currentlyTakingRide", false)
+                                    .append("takingRide", "")
+                                    .append("confirmedRide", confirmedRide)
                                     .append("numberOfRidesDriven", 0)
                                     .append("numberOfRidesTaken", 0)
                                     .append("overAllReview", 0)

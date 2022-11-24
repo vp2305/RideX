@@ -27,9 +27,6 @@ public class Posts extends RealmObject {
     private String date;
 
     @Required
-    private String posterUID;
-
-    @Required
     private String fromLocation;
 
     private String licensePlate;
@@ -40,7 +37,13 @@ public class Posts extends RealmObject {
     private String postDescription;
 
     @Required
+    private String postStatus;
+
+    @Required
     private String postedAs;
+
+    @Required
+    private String posterUID;
 
     private String time;
 
@@ -69,9 +72,6 @@ public class Posts extends RealmObject {
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
 
-    public String getPosterUID() { return posterUID; }
-    public void setPosterUID(String posterUID) { this.posterUID = posterUID; }
-
     public String getFromLocation() { return fromLocation; }
     public void setFromLocation(String fromLocation) { this.fromLocation = fromLocation; }
 
@@ -84,8 +84,14 @@ public class Posts extends RealmObject {
     public String getPostDescription() { return postDescription; }
     public void setPostDescription(String postDescription) { this.postDescription = postDescription; }
 
+    public String getPostStatus() { return postStatus; }
+    public void setPostStatus(String postStatus) { this.postStatus = postStatus; }
+
     public String getPostedAs() { return postedAs; }
     public void setPostedAs(String postedAs) { this.postedAs = postedAs; }
+
+    public String getPosterUID() { return posterUID; }
+    public void setPosterUID(String posterUID) { this.posterUID = posterUID; }
 
     public String getTime() { return time; }
     public void setTime(String time) { this.time = time; }

@@ -1,5 +1,6 @@
 package com.example.ridex.models;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -11,7 +12,8 @@ public class Users extends RealmObject {
     @Required
     private ObjectId _id;
 
-    private Boolean currentlyTakingRide;
+    @Required
+    private RealmList<String> confirmedRide;
 
     @Required
     private String email;
@@ -30,6 +32,8 @@ public class Users extends RealmObject {
 
     private String photoUrl;
 
+    private String takingRide;
+
     @Required
     private String uid;
 
@@ -37,8 +41,8 @@ public class Users extends RealmObject {
     public ObjectId getId() { return _id; }
     public void setId(ObjectId _id) { this._id = _id; }
 
-    public Boolean getCurrentlyTakingRide() { return currentlyTakingRide; }
-    public void setCurrentlyTakingRide(Boolean currentlyTakingRide) { this.currentlyTakingRide = currentlyTakingRide; }
+    public RealmList<String> getConfirmedRide() { return confirmedRide; }
+    public void setConfirmedRide(RealmList<String> confirmedRide) { this.confirmedRide = confirmedRide; }
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
@@ -60,6 +64,9 @@ public class Users extends RealmObject {
 
     public String getPhotoUrl() { return photoUrl; }
     public void setPhotoUrl(String photoUrl) { this.photoUrl = photoUrl; }
+
+    public String getTakingRide() { return takingRide; }
+    public void setTakingRide(String takingRide) { this.takingRide = takingRide; }
 
     public String getUid() { return uid; }
     public void setUid(String uid) { this.uid = uid; }

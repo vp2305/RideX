@@ -5,16 +5,20 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavType;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ridex.models.Users;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import io.realm.Realm;
 import io.realm.RealmObjectChangeListener;
@@ -35,9 +39,17 @@ public class HomePageFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private final static String ACTIVITY_NAME = "HomePageFragment";
 
+
     // Ui variables
     TextView greetingText;
     ImageButton profileBtn;
+    Button searchBtn;
+    BottomNavigationView menu;
+    EditText fromEditText, toEditText;
+
+    //Data
+    String fromLocation, toLocation;
+    Bundle bundle;
 
     // Realm variables.
     Users currUsersInfo;
@@ -77,7 +89,6 @@ public class HomePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(ACTIVITY_NAME, "onCreate()");
-
         app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
 //        configuration =
 //                new SyncConfiguration.Builder(app.currentUser())
@@ -110,14 +121,33 @@ public class HomePageFragment extends Fragment {
         // Get all the field
         greetingText = view.findViewById(R.id.greeting_text);
         profileBtn = view.findViewById(R.id.home_page_profile_btn);
+        searchBtn = view.findViewById(R.id.search_btn);
+        menu = getActivity().findViewById(R.id.bottomNavigation);
+        fromEditText = view.findViewById(R.id.from_edit_text);
+        toEditText = view.findViewById(R.id.to_edit_text);
         // End of all the field collection
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fromLocation = fromEditText.getText().toString();
+                toLocation = toEditText.getText().toString();
+                menu.findViewById(R.id.search).performClick(); //click search item change menu item
+                //create new bundle to pass both locations
+                bundle = new Bundle();
+                bundle.putString("fromLocation", fromLocation);
+                bundle.putString("toLocation", toLocation);
+                SearchFragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout, searchFragment).commit();
+
+            }
+        });
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frameLayout, new AccountPageFragment());
-                fragmentTransaction.commit();
+                menu.findViewById(R.id.account).performClick();
             }
         });
 

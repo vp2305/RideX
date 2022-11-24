@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.post:
                     replaceFragment(new CreatePostingsFragment());
                     break;
+                case R.id.search:
+                    replaceFragment(new SearchFragment());
+                    break;
+                case R.id.inbox:
+                    break;
             }
 
             return true;

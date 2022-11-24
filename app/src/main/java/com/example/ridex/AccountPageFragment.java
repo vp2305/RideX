@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class AccountPageFragment extends Fragment {
     private String mParam2;
 
     // UI Variables
-    ImageButton logoutBtn;
+    ImageButton logoutBtn, helpBtn;
     TextView fullName, numberOfRidesDriven, numberOfRidesTaken, overAllRating;
 
     // Realm variables.
@@ -89,6 +90,7 @@ public class AccountPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account_page, container, false);
         // Initialize the variables
         logoutBtn = view.findViewById(R.id.logoutBtn);
+        helpBtn = view.findViewById(R.id.helpBtn);
         fullName = view.findViewById(R.id.userFullName);
         numberOfRidesDriven = view.findViewById(R.id.numberOfRidesDriven);
         numberOfRidesTaken = view.findViewById(R.id.numberOfRidesTaken);
@@ -113,6 +115,14 @@ public class AccountPageFragment extends Fragment {
                                 "Unable to logout successfully", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        helpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               getFragmentManager().beginTransaction().replace(R.id.frameLayout, new HelpPageFragment()).commit();
+
             }
         });
 

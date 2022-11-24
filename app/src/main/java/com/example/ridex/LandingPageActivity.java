@@ -26,9 +26,10 @@ public class LandingPageActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "LandingPageActivity";
     Button getStartedBtn;
-    ImageSwitcher imageSwitcher;
+    ImageSwitcher imageSwitcher, imageSwitcherDots;
     private int position = 0;
     private int[] image = {R.drawable.infocard1_formatter, R.drawable.infocard2_formatter, R.drawable.infocard3_formatter};
+    private int[] dots = {R.drawable.dot1, R.drawable.dot2, R.drawable.dot3};
     //for swipe gesture
     ConstraintLayout myLayout;
     SwipeListener swipeListener;
@@ -49,10 +50,11 @@ public class LandingPageActivity extends AppCompatActivity {
         swipeListener = new SwipeListener(myLayout);
         bground = findViewById(R.id.bground);
         welcome = findViewById(R.id.welcome);
+        imageSwitcherDots = findViewById(R.id.imageSwitcherDots);
 
         //animate the background
-        bground.animate().translationY(-1800).setDuration(800).setStartDelay(1000);
-        welcome.animate().translationY(-500).setDuration(800).setStartDelay(1000);
+        bground.animate().translationY(-1900).setDuration(800).setStartDelay(1000);
+        welcome.animate().translationY(-650).setDuration(800).setStartDelay(1000);
 
         //set default view
         imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -60,6 +62,15 @@ public class LandingPageActivity extends AppCompatActivity {
             public View makeView() {
                 ImageView imageView = new ImageView(LandingPageActivity.this);
                 imageView.setImageResource(image[position]);
+                return imageView;
+            }
+        });
+
+        imageSwitcherDots.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView = new ImageView(LandingPageActivity.this);
+                imageView.setImageResource(dots[position]);
                 return imageView;
             }
         });
@@ -126,6 +137,7 @@ public class LandingPageActivity extends AppCompatActivity {
             int threshold = 100;
             int velocity_threshold = 100;
             imageSwitcher = findViewById(R.id.imageSwitcher);
+            imageSwitcherDots = findViewById(R.id.imageSwitcherDots);
             GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener(){
                 @Override
                 public boolean onDown(MotionEvent e) {
@@ -150,6 +162,7 @@ public class LandingPageActivity extends AppCompatActivity {
                                         position--;
                                         if (position<0){position =2;}
                                         imageSwitcher.setImageResource(image[position]);
+                                        imageSwitcherDots.setImageResource((dots[position]));
                                     }
 
                                 }else{
@@ -160,6 +173,7 @@ public class LandingPageActivity extends AppCompatActivity {
                                         position++;
                                         if(position>2){position = 0;}
                                         imageSwitcher.setImageResource(image[position]);
+                                        imageSwitcherDots.setImageResource((dots[position]));
                                     }
 
                                 }

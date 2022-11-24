@@ -3,7 +3,7 @@
     <item
         android:drawable="@drawable/infocard1"
         android:width="300dp"
-        android:height="120dp"
+        android:height="150dp"
         />
 
 </selector>

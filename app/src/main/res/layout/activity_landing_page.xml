@@ -8,26 +8,27 @@
     android:id="@+id/myLayout"
     tools:context=".LandingPageActivity">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/logo"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:foregroundGravity="center"-->
-<!--        android:src="@drawable/logo_formatter"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageSwitcher
         android:id="@+id/imageSwitcher"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageSwitcher
+        android:id="@+id/imageSwitcherDots"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSwitcher"/>
+
+
 
     <Button
         android:id="@+id/getStartedButton"
@@ -35,12 +36,13 @@
         android:layout_height="55dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
         android:text="Get Started"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageSwitcher"
+        app:layout_constraintTop_toBottomOf="@+id/imageSwitcherDots"
          />
 
     <com.airbnb.lottie.LottieAnimationView

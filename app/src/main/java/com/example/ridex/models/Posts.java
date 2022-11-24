@@ -12,32 +12,56 @@ public class Posts extends RealmObject {
     @Required
     private ObjectId _id;
 
-    private ChatRoom chatRoomID;
+    private Integer availableSeats;
+
+    private String carColor;
+
+    private String carModel;
+
+    private String carYear;
 
     @Required
     private RealmList<String> confirmedUsers;
 
+    @Required
     private String date;
 
     @Required
-    private String driverUID;
+    private String posterUID;
 
+    @Required
     private String fromLocation;
 
-    private Ride postID;
+    private String licensePlate;
 
-    private String ridePostDescription;
+    @Required
+    private Integer numberOfSeats;
+
+    private String postDescription;
+
+    @Required
+    private String postedAs;
 
     private String time;
 
+    @Required
     private String toLocation;
 
     // Standard getters & setters
     public ObjectId getId() { return _id; }
     public void setId(ObjectId _id) { this._id = _id; }
 
-    public ChatRoom getChatRoomID() { return chatRoomID; }
-    public void setChatRoomID(ChatRoom chatRoomID) { this.chatRoomID = chatRoomID; }
+    public Integer getAvailableSeats() { return availableSeats; }
+    public void setAvailableSeats(Integer availableSeats) { this.availableSeats = availableSeats; }
+
+    public String getCarColor() { return carColor; }
+    public void setCarColor(String carColor) { this.carColor = carColor; }
+
+    public String getCarModel() { return carModel; }
+    public void setCarModel(String carModel) { this.carModel = carModel; }
+
+    public String getCarYear() { return carYear; }
+    public void setCarYear(String carYear) { this.carYear = carYear; }
 
     public RealmList<String> getConfirmedUsers() { return confirmedUsers; }
     public void setConfirmedUsers(RealmList<String> confirmedUsers) { this.confirmedUsers = confirmedUsers; }
@@ -45,17 +69,23 @@ public class Posts extends RealmObject {
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
 
-    public String getDriverUID() { return driverUID; }
-    public void setDriverUID(String driverUID) { this.driverUID = driverUID; }
+    public String getPosterUID() { return posterUID; }
+    public void setPosterUID(String posterUID) { this.posterUID = posterUID; }
 
     public String getFromLocation() { return fromLocation; }
     public void setFromLocation(String fromLocation) { this.fromLocation = fromLocation; }
 
-    public Ride getPostID() { return postID; }
-    public void setPostID(Ride postID) { this.postID = postID; }
+    public String getLicensePlate() { return licensePlate; }
+    public void setLicensePlate(String licensePlate) { this.licensePlate = licensePlate; }
 
-    public String getRidePostDescription() { return ridePostDescription; }
-    public void setRidePostDescription(String ridePostDescription) { this.ridePostDescription = ridePostDescription; }
+    public Integer getNumberOfSeats() { return numberOfSeats; }
+    public void setNumberOfSeats(Integer numberOfSeats) { this.numberOfSeats = numberOfSeats; }
+
+    public String getPostDescription() { return postDescription; }
+    public void setPostDescription(String postDescription) { this.postDescription = postDescription; }
+
+    public String getPostedAs() { return postedAs; }
+    public void setPostedAs(String postedAs) { this.postedAs = postedAs; }
 
     public String getTime() { return time; }
     public void setTime(String time) { this.time = time; }

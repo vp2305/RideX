@@ -106,6 +106,7 @@
                 android:layout_height="55dp"
                 android:textAllCaps="false"
                 android:text="Upload"
+                android:textColor="@color/white"
                 />
 
         </LinearLayout>
@@ -117,6 +118,7 @@
             android:layout_marginTop="20dp"
             android:textAllCaps="false"
             android:text="Continue"
+            android:textColor="@color/white"
             android:onClick="continueBtnListener"
             />
 

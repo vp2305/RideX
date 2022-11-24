@@ -12,14 +12,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ridex.databinding.ActivityMainBinding;
+import com.example.ridex.models.Posts;
 import com.example.ridex.models.Users;
 
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.AppException;
+import io.realm.mongodb.ErrorCode;
 import io.realm.mongodb.sync.MutableSubscriptionSet;
 import io.realm.mongodb.sync.Subscription;
 import io.realm.mongodb.sync.SyncConfiguration;
+import io.realm.mongodb.sync.SyncSession;
 
 // https://stackoverflow.com/questions/44331742/how-to-manage-realm-instance
 
@@ -48,13 +52,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.home:
                     replaceFragment(new HomePageFragment());
                     break;
-
                 case R.id.account:
                     replaceFragment(new AccountPageFragment());
                     break;
-
-                case R.id.search:
-                    replaceFragment(new SearchFragment());
+                case R.id.post:
+                    replaceFragment(new CreatePostingsFragment());
+                    break;
             }
 
             return true;
@@ -64,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
 
         configuration =
                 new SyncConfiguration.Builder(app.currentUser())
+                        .errorHandler(new SyncSession.ErrorHandler() {
+                            @Override
+                            public void onError(SyncSession session, AppException error) {
+                                if (error.getErrorCode() == ErrorCode.BAD_AUTHENTICATION){
+                                    app.currentUser().logOut();
+                                }
+                            }
+                        })
                         .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
                             @Override
                             public void configure(@NonNull Realm realm,
@@ -73,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                                         realm.where(Users.class)
                                                 .equalTo("uid", app.currentUser().getId())
                                 ));
+                                subscriptions.addOrUpdate(Subscription.create("postsQuery",
+                                        realm.where(Posts.class)));
                             }
                         })
                         .build();

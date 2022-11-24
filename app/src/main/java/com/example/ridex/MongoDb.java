@@ -1,7 +1,10 @@
 package com.example.ridex;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -13,6 +16,7 @@ public class MongoDb extends Application {
     public final static String databaseName = "rideX";
     public final static String usersCollection = "Users";
     public final static String realmName = "rideX.realm";
+    private static final String REALM_TAG = "__REALM__";
 
     // Public Key: nmoluriz
     // Private Key: 6170a1e8-c362-4412-aa79-c18b38af11c7
@@ -33,6 +37,19 @@ public class MongoDb extends Application {
                 .name(realmName).schemaVersion(1).build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }
+
+//    public static Realm getRealm(Context context) {
+//        // noinspection ResourceType
+//        return (Realm)context.getSystemService(REALM_TAG);
+//    }
+//
+//    @Override
+//    public Object getSystemService(@NonNull String name) {
+//        if(REALM_TAG.equals(name)) {
+//            return realm;
+//        }
+//        return super.getSystemService(name);
+//    }
 
     @Override
     public void onLowMemory() {

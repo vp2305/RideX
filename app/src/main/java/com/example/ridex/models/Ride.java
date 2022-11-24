@@ -17,6 +17,8 @@ public class Ride extends RealmObject {
 
     private String rideDuration;
 
+    private Posts rideID;
+
     private Boolean rideStatus;
 
     @Required
@@ -31,6 +33,9 @@ public class Ride extends RealmObject {
 
     public String getRideDuration() { return rideDuration; }
     public void setRideDuration(String rideDuration) { this.rideDuration = rideDuration; }
+
+    public Posts getRideID() { return rideID; }
+    public void setRideID(Posts rideID) { this.rideID = rideID; }
 
     public Boolean getRideStatus() { return rideStatus; }
     public void setRideStatus(Boolean rideStatus) { this.rideStatus = rideStatus; }

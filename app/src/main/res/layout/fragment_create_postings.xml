@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="5dp"
+    tools:context=".CreatePostingsFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:gravity="left|center"
+                android:text="Create as:" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/spinner_background"
+                >
+                <Spinner
+                    android:id="@+id/createPostDropdown"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:popupBackground="@color/white"
+                    android:backgroundTint="@color/black"
+                    android:entries="@array/searchUserDropdown"
+                    />
+            </FrameLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/createPostingFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -142,7 +142,8 @@ public class HomePageFragment extends Fragment {
                     case "lastName":
                     case "firstName":
                         greetingText.setText(String.format("Hello, %s %s",
-                                currUsersInfo.getFirstName(), currUsersInfo.getLastName()));
+                                currUsersInfo.getFirstName().replace(" ", ""),
+                                currUsersInfo.getLastName().replace(" ", "")));
                         break;
                     case "email":
                         Log.i(ACTIVITY_NAME, "Email is changed!");
@@ -154,7 +155,8 @@ public class HomePageFragment extends Fragment {
         };
         currUsersInfo.addChangeListener(userListener);
         greetingText.setText(String.format("Hello, %s %s",
-                currUsersInfo.getFirstName(), currUsersInfo.getLastName()));
+                currUsersInfo.getFirstName().replace(" ", ""),
+                currUsersInfo.getLastName().replace(" ", "")));
 
         // Inflate the layout for this fragment
         return view;

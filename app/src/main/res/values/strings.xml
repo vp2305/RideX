@@ -21,5 +21,11 @@
     <string name="upload_existing_image">Upload existing image:</string>
     <string name="profile_previewPicture_text">Preview of the profile picture:</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_authors">Authors</string>
+    <string name="vaibhav_patel">Vaibhav Patel (190559020)</string>
+    <string name="devarsh_patwa">Devarsh Patwa (190417940)</string>
+    <string name="aryan_amin">Aryan Amin (193265300)</string>
+    <string name="brianna">Brianna Nguyen</string>
+    <string name="dhwani">Dhwani Patel</string>
+    <string name="activity_version">Version 1.0.0</string>
 </resources>

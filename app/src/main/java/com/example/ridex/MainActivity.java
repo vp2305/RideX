@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.account:
                     replaceFragment(new AccountPageFragment());
                     break;
+
+                case R.id.search:
+                    replaceFragment(new SearchFragment());
             }
 
             return true;

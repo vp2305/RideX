@@ -34,10 +34,9 @@ public class ChatWindowFragment extends Fragment {
 
     //UI
     BottomNavigationView menu;
-
     ImageButton backBtn;
     FrameLayout frameLayout;
-    ViewGroup.MarginLayoutParams mlp;
+
 
     public ChatWindowFragment() {
         // Required empty public constructor
@@ -81,9 +80,6 @@ public class ChatWindowFragment extends Fragment {
         backBtn = view.findViewById(R.id.backImage);
         frameLayout = getActivity().findViewById(R.id.frameLayout);
 
-        mlp = (ViewGroup.MarginLayoutParams) frameLayout.getLayoutParams();
-        mlp.bottomMargin = 0;
-
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +89,9 @@ public class ChatWindowFragment extends Fragment {
         });
 
 
+
+        //hide menubar
+        menu.setVisibility(View.GONE);
 
 
 
@@ -104,13 +103,15 @@ public class ChatWindowFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i(ACTIVITY_NAME, "destryvojefsljhfbgse");
-        mlp.bottomMargin = 180;
+        Log.i(ACTIVITY_NAME, "OnDestroyView");
+        menu.setVisibility(View.VISIBLE);
+
 
     }
 }

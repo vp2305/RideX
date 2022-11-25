@@ -20,6 +20,8 @@ public class Posts extends RealmObject {
 
     private String carYear;
 
+    private Double price;
+
     @Required
     private RealmList<String> confirmedUsers;
 
@@ -98,4 +100,7 @@ public class Posts extends RealmObject {
 
     public String getToLocation() { return toLocation; }
     public void setToLocation(String toLocation) { this.toLocation = toLocation; }
+
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 }

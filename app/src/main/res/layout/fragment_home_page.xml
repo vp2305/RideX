@@ -91,8 +91,8 @@
 
                         <ImageView
                             android:id="@+id/pickup_image_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             app:srcCompat="@drawable/user_location"
                             android:paddingTop="10dp"/>
 
@@ -105,8 +105,8 @@
 
                         <ImageView
                             android:id="@+id/destination_image_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             app:srcCompat="@drawable/place_marker" />
                     </LinearLayout>
                     <LinearLayout

@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,7 @@ public class SearchFragment extends Fragment {
     TextView heading;
     Button searchBtn;
     RecyclerView postingsRecyclerView;
+    Spinner searchAsDropdown;
     //Data
     String fromLocation = "", toLocation = "";
     Realm realm;
@@ -98,6 +101,19 @@ public class SearchFragment extends Fragment {
         heading = view.findViewById(R.id.heading);
         searchBtn = view.findViewById(R.id.search_btn);
         postingsRecyclerView = view.findViewById(R.id.postingsRecyclerView);
+        searchAsDropdown = view.findViewById(R.id.searchAsDropdown);
+
+        searchAsDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                searchFilter();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //if locations are passed
         if (getArguments()!=null
@@ -110,59 +126,66 @@ public class SearchFragment extends Fragment {
             heading.setText("Postings");
         }
 
-        if (fromLocation.equals("") && toLocation.equals("")){
-            Log.i(ACTIVITY_NAME, "Working with all the posts");
-            allPosts = realm.where(Posts.class)
-                    .equalTo("postStatus", "Active")
-                    .sort("date", Sort.ASCENDING)
-                    .findAll();
-        } else {
-            Log.i(ACTIVITY_NAME, "Working with all selected posts");
-            allPosts = realm.where(Posts.class)
-                    .equalTo("fromLocation", fromLocation)
-                    .equalTo("toLocation", toLocation)
-                    .sort("date", Sort.ASCENDING)
-                    .equalTo("postStatus", "Active")
-                    .findAll();
-        }
-
-        displayPostingViews(allPosts);
+        searchFilter();
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fromEditText.getText().toString().isEmpty() &&
-                        !toEditText.getText().toString().isEmpty()){
-                    Log.i(ACTIVITY_NAME, "To Location!");
-                    RealmResults<Posts> searchPosts = realm.where(Posts.class)
-                            .equalTo("toLocation", toEditText.getText().toString())
-                            .equalTo("postStatus", "Active")
-                            .sort("date", Sort.ASCENDING)
-                            .findAll();
-                    if (searchPosts.size() == 0){
-                        emptyPostingViews();
-                    } else {
-                        displayPostingViews(searchPosts);
-                    }
-
-                } else if (toEditText.getText().toString().isEmpty()
-                        && !fromEditText.getText().toString().isEmpty()) {
-                    Log.i(ACTIVITY_NAME, "From Location!");
-                    RealmResults<Posts> searchPosts = realm.where(Posts.class)
-                            .equalTo("fromLocation", fromEditText.getText().toString())
-                            .equalTo("postStatus", "Active")
-                            .sort("date", Sort.ASCENDING)
-                            .findAll();
-                    displayPostingViews(searchPosts);
-                } else {
-                    Toast.makeText(getContext(),
-                            "Please make sure from or two location is filled!",
-                            Toast.LENGTH_LONG).show();
-                }
+                searchFilter();
             }
         });
         return view;
     }
+
+    public void searchFilter(){
+        RealmResults<Posts> searchResults;
+
+        if (fromEditText.getText().toString().isEmpty() && toEditText.getText().toString().isEmpty()){
+            searchResults = realm.where(Posts.class)
+                    .equalTo("postStatus", "Active")
+                    .equalTo("postedAs",
+                            searchAsDropdown.getSelectedItem().toString().equals("Rider") ? "Driver" : "Rider")
+                    .sort("date", Sort.ASCENDING)
+                    .findAll();
+        } else if (fromEditText.getText().toString().isEmpty() &&
+                !toEditText.getText().toString().isEmpty()){
+            searchResults = realm.where(Posts.class)
+                    .equalTo("toLocation", toEditText.getText().toString())
+                    .equalTo("postStatus", "Active")
+                    .equalTo("postedAs",
+                            searchAsDropdown.getSelectedItem().toString().equals("Rider") ? "Driver" : "Rider")
+                    .sort("date", Sort.ASCENDING)
+                    .findAll();
+
+        } else if (toEditText.getText().toString().isEmpty()
+                && !fromEditText.getText().toString().isEmpty()){
+            searchResults = realm.where(Posts.class)
+                    .equalTo("fromLocation", fromEditText.getText().toString())
+                    .equalTo("postStatus", "Active")
+                    .equalTo("postedAs",
+                            searchAsDropdown.getSelectedItem().toString().equals("Rider") ? "Driver" : "Rider")
+                    .sort("date", Sort.ASCENDING)
+                    .findAll();
+
+        } else {
+            searchResults = realm.where(Posts.class)
+                    .equalTo("fromLocation", fromLocation)
+                    .equalTo("toLocation", toLocation)
+                    .equalTo("postedAs",
+                            searchAsDropdown.getSelectedItem().toString().equals("Rider") ? "Driver" : "Rider")
+                    .equalTo("postStatus", "Active")
+                    .sort("date", Sort.ASCENDING)
+
+                    .findAll();
+        }
+
+        if (searchResults.size() == 0){
+            emptyPostingViews();
+        } else {
+            displayPostingViews(searchResults);
+        }
+    }
+
 
     public void displayPostingViews(RealmResults<Posts> posts){
         PostingsRealmAdapter postingsAdapter = new PostingsRealmAdapter(getContext(), posts);

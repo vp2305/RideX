@@ -248,6 +248,45 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="left|center"
+                    android:text="My Listings"
+                    android:textSize="17sp" />
+
+                <ImageButton
+                    android:id="@+id/myListingsImageBtn"
+                    android:layout_weight="1"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:paddingEnd="26dp"
+                    android:paddingStart="26dp"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/transparent_drawable"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/more_than30" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bottom_border"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/id_verification" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center"
                     android:text="ID Verification"
                     android:textSize="17sp" />
 

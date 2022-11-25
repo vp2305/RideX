@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SearchFragment());
                     break;
                 case R.id.inbox:
+                    replaceFragment(new ChatWindowFragment());
                     break;
             }
 

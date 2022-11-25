@@ -123,6 +123,7 @@ public class RiderCreatePostingFragment extends Fragment {
                                 new ObjectId()
                         );
                         riderPost.setPostedAs("Rider");
+                        riderPost.setPostStatus("Active");
                         riderPost.setPosterUID(app.currentUser().getId());
                         riderPost.setFromLocation(fromLocation.getText().toString());
                         riderPost.setToLocation(toLocation.getText().toString());

@@ -144,31 +144,64 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <TextView
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Available Seats"
-                        android:textSize="15sp"
-                        android:textColor="#BFFFFFFF"
-                        />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:background="@drawable/accent_spinner_background"
-                        android:layout_marginBottom="10dp"
-                        >
-                        <Spinner
-                            android:id="@+id/availableSeats"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:popupBackground="@color/white"
-                            android:backgroundTint="@color/black"
-                            android:entries="@array/numberOfSeats"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Available Seats"
+                            android:textSize="15sp"
+                            android:textColor="#BFFFFFFF"
                             />
-                    </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@drawable/accent_spinner_background"
+                            android:layout_marginBottom="10dp"
+                            >
+                            <Spinner
+                                android:id="@+id/availableSeats"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:popupBackground="@color/white"
+                                android:backgroundTint="@color/black"
+                                android:entries="@array/numberOfSeats"
+                                />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Price"
+                            android:textSize="15sp"
+                            android:textColor="#BFFFFFFF"
+                            />
+
+                        <EditText
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:ems="10"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/black"
+                            android:padding="5dp"
+                            android:background="@drawable/accent_input_text_select"
+                            android:text="" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>

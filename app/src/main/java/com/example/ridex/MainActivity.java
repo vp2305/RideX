@@ -12,7 +12,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.ridex.databinding.ActivityMainBinding;
+import com.example.ridex.models.ChatRoom;
+import com.example.ridex.models.Messages;
 import com.example.ridex.models.Posts;
+import com.example.ridex.models.Ride;
 import com.example.ridex.models.Users;
 
 import io.realm.Realm;
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SearchFragment());
                     break;
                 case R.id.inbox:
+                    replaceFragment(new ChatWindowFragment());
                     break;
             }
 
@@ -91,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
                                 ));
                                 subscriptions.addOrUpdate(Subscription.create("postsQuery",
                                         realm.where(Posts.class)));
+                                subscriptions.addOrUpdate(Subscription.create("messagesQuery",
+                                        realm.where(Messages.class)));
+                                subscriptions.addOrUpdate(Subscription.create("chatRoomQuery",
+                                        realm.where(ChatRoom.class)));
+                                subscriptions.addOrUpdate(Subscription.create("rideQuery",
+                                        realm.where(Ride.class)));
                             }
                         })
                         .build();

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ridex.models.Users;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import io.realm.Realm;
 import io.realm.RealmObjectChangeListener;
@@ -39,7 +40,7 @@ public class AccountPageFragment extends Fragment {
     private String mParam2;
 
     // UI Variables
-    ImageButton logoutBtn, helpBtn;
+    ImageButton logoutBtn, helpBtn, myListingsBtn;
     TextView fullName, numberOfRidesDriven, numberOfRidesTaken, overAllRating;
 
     // Realm variables.
@@ -95,6 +96,7 @@ public class AccountPageFragment extends Fragment {
         numberOfRidesDriven = view.findViewById(R.id.numberOfRidesDriven);
         numberOfRidesTaken = view.findViewById(R.id.numberOfRidesTaken);
         overAllRating = view.findViewById(R.id.overAllRating);
+        myListingsBtn = view.findViewById(R.id.myListingsImageBtn);
         // End of the initialization of the variable
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +125,13 @@ public class AccountPageFragment extends Fragment {
             public void onClick(View view) {
                getFragmentManager().beginTransaction().replace(R.id.frameLayout, new HelpPageFragment()).commit();
 
+            }
+        });
+
+        myListingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.frameLayout, new MyListingsFragment()).commit();
             }
         });
 

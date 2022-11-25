@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/male_user"
-        android:width="60dp"
+        android:width="55dp"
         android:height="50dp"
         />
     <shape xmlns:android="http://schemas.android.com/apk/res/android"

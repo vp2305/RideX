@@ -3,6 +3,7 @@ package com.example.ridex;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavType;
@@ -89,6 +90,7 @@ public class HomePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(ACTIVITY_NAME, "onCreate()");
+
         app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
 //        configuration =
 //                new SyncConfiguration.Builder(app.currentUser())
@@ -210,4 +212,5 @@ public class HomePageFragment extends Fragment {
         super.onDetach();
         Log.i(ACTIVITY_NAME, "onDetach()");
     }
+
 }

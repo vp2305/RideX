@@ -47,7 +47,7 @@ public class DriverCreatePostingFragment extends Fragment {
             carYear,
             licensePlate,
             carColor,
-            postDescription;
+            postDescription, price;
     Spinner seatsAvailable, time;
     Button driverPostBtn;
 
@@ -107,6 +107,7 @@ public class DriverCreatePostingFragment extends Fragment {
         carColor = view.findViewById(R.id.carColor);
         licensePlate = view.findViewById(R.id.carLicensePlate);
         driverPostBtn = view.findViewById(R.id.driverPostBtn);
+        price = view.findViewById(R.id.price);
         // End of assigning UI elements
 
         driverPostBtn.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +134,9 @@ public class DriverCreatePostingFragment extends Fragment {
                                 new ObjectId()
                         );
                         driverPost.setPostedAs("Driver");
+                        driverPost.setPostStatus("Active");
                         driverPost.setPosterUID(app.currentUser().getId());
+                        driverPost.setPrice(Double.parseDouble(price.getText().toString()));
                         driverPost.setFromLocation(fromLocation.getText().toString());
                         driverPost.setToLocation(toLocation.getText().toString());
                         driverPost.setDate(date.getText().toString());
@@ -165,6 +168,7 @@ public class DriverCreatePostingFragment extends Fragment {
                             seatsAvailable.setSelection(0);
                             carColor.setText("");
                             postDescription.setText("");
+                            price.setText("");
                         }
                     }, new Realm.Transaction.OnError() {
                         @Override

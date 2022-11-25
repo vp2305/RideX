@@ -6,9 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -24,6 +26,7 @@ public class ChatWindowFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String ACTIVITY_NAME = "ChatWindowFragment";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -31,9 +34,10 @@ public class ChatWindowFragment extends Fragment {
 
     //UI
     BottomNavigationView menu;
-    ConstraintLayout constraintLayout;
-    ConstraintSet constraintSet;
+
     ImageButton backBtn;
+    FrameLayout frameLayout;
+    ViewGroup.MarginLayoutParams mlp;
 
     public ChatWindowFragment() {
         // Required empty public constructor
@@ -74,8 +78,12 @@ public class ChatWindowFragment extends Fragment {
 
         //get fields
         menu = getActivity().findViewById(R.id.bottomNavigation);
-        constraintLayout = getActivity().findViewById(R.id.main_parentLayout);
         backBtn = view.findViewById(R.id.backImage);
+        frameLayout = getActivity().findViewById(R.id.frameLayout);
+
+        mlp = (ViewGroup.MarginLayoutParams) frameLayout.getLayoutParams();
+        mlp.bottomMargin = 0;
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,13 +92,9 @@ public class ChatWindowFragment extends Fragment {
             }
         });
 
-        //Shift the framelayout down
-        constraintSet = new ConstraintSet();
-        constraintSet.clone(constraintLayout);
-        constraintSet.connect(R.id.frameLayout, ConstraintSet.BOTTOM, R.id.main_parentLayout,ConstraintSet.BOTTOM,0);
-        constraintSet.applyTo(constraintLayout);
-        //hide menubar
-        menu.setVisibility(View.GONE);
+
+
+
 
 
         return view;
@@ -99,12 +103,14 @@ public class ChatWindowFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        menu.setVisibility(View.VISIBLE);
 
-        constraintSet = new ConstraintSet();
-        constraintSet.clone(constraintLayout);
-        constraintSet.connect(R.id.frameLayout, ConstraintSet.BOTTOM, R.id.bottomNavigation,ConstraintSet.TOP,0);
-        constraintSet.applyTo(constraintLayout);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i(ACTIVITY_NAME, "destryvojefsljhfbgse");
+        mlp.bottomMargin = 180;
 
     }
 }

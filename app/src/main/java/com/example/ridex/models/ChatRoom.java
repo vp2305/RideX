@@ -12,8 +12,6 @@ public class ChatRoom extends RealmObject {
     @Required
     private ObjectId _id;
 
-    private Posts chatRoomID;
-
     @Required
     private RealmList<String> messages;
 
@@ -26,9 +24,6 @@ public class ChatRoom extends RealmObject {
     // Standard getters & setters
     public ObjectId getId() { return _id; }
     public void setId(ObjectId _id) { this._id = _id; }
-
-    public Posts getChatRoomID() { return chatRoomID; }
-    public void setChatRoomID(Posts chatRoomID) { this.chatRoomID = chatRoomID; }
 
     public RealmList<String> getMessages() { return messages; }
     public void setMessages(RealmList<String> messages) { this.messages = messages; }

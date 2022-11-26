@@ -21,7 +21,7 @@
         android:layout_marginLeft="6dp"
         android:background="@drawable/received_message_background"
         android:padding="15dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@id/profilePhoto"
         app:layout_constraintTop_toTopOf="parent"

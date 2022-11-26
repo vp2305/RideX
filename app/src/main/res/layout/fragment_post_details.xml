@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Message"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:layout_gravity="center"
                 android:layout_marginRight="15dp">
@@ -156,9 +157,11 @@
             android:layout_marginTop="10dp">
 
             <LinearLayout
+                android:id="@+id/price_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -180,10 +183,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1"
-                android:gravity="center">
+                android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/seats_available_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seats Available:"
@@ -201,74 +204,84 @@
 
 
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Car Details"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp">
-
-        </TextView>
 
         <LinearLayout
+            android:id="@+id/car_details_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Car Details"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="20dp">
+
+            </TextView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Model"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/car_model"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Honda Civic 2021"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Model"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/car_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Honda Civic 2021"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="License Plate"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/car_license_plate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="WLU CP 470"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                    android:orientation="vertical"
+                    android:layout_weight="1">
 
-                <TextView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="License Plate"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/car_license_plate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WLU CP 470"/>
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Color"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:id="@+id/car_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Blue"/>
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Color"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/car_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Blue"/>
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -282,7 +295,7 @@
             android:id="@+id/ride_add_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Some Big ASS Comment"
+            android:text="No Comments"
             android:layout_marginTop="10dp">
 
         </TextView>
@@ -296,6 +309,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirm Ride"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"/>

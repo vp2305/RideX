@@ -74,7 +74,7 @@ public class PostingsRealmAdapter
 //                FragmentManager fragmentManager =
 //                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //                fragmentTransaction.replace(R.id.frameLayout, new PostDetailsFragment()).commit();
-                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new PostDetailsFragment()).commit();
+                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, postDetailsFragment).commit();
             }
         });
     }

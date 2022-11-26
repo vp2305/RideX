@@ -1,6 +1,7 @@
 package com.example.ridex;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ridex.models.Posts;
@@ -56,6 +62,21 @@ public class PostingsRealmAdapter
                     String.valueOf(postsList.get(position).getNumberOfSeats())
             );
         }
+        holder.moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String postID = postsList.get(position).getId().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("postId", postID);
+                PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
+                postDetailsFragment.setArguments(bundle);
+                //getFragmentManager().beginTransaction().replace(R.id.frameLayout, postDetailsFragment).commit();
+//                FragmentManager fragmentManager =
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.frameLayout, new PostDetailsFragment()).commit();
+                ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new PostDetailsFragment()).commit();
+            }
+        });
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -73,6 +94,7 @@ public class PostingsRealmAdapter
             toLocation = itemView.findViewById(R.id.toLocationText);
             seatsOrPriceImage = itemView.findViewById(R.id.seatsOrPriceImage);
             seatsOrPriceText = itemView.findViewById(R.id.seatsOrPriceText);
+            moreBtn = itemView.findViewById(R.id.moreBtn);
         }
     }
 }

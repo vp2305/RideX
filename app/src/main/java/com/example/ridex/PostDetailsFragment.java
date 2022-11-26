@@ -7,6 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.ridex.models.Posts;
+
+import org.bson.types.ObjectId;
+
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +26,11 @@ public class PostDetailsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    Realm realm;
+    Posts currentPosting;
+    String postId = "";
+    TextView driverInfo, driverName, driverRating, pickupLocation, dropoffLocation, rideDate, ridePrice, seatsAvailable, carModel, carLicensePlate, carColor, rideAddComments;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -53,12 +65,51 @@ public class PostDetailsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        realm = MainActivity.getRealm(getActivity());
+        if (getArguments() != null && !getArguments().getString("postId").isEmpty()){
+            postId = getArguments().getString("postId");
+        }
+        currentPosting = realm.where(Posts.class).equalTo("_id", new ObjectId(postId)).findFirst();
+        if (currentPosting.getPostedAs().equals("Driver")){
+            //driverName.setText(currentPosting.get);
+            //driverRating
+            pickupLocation.setText(currentPosting.getFromLocation());
+            dropoffLocation.setText(currentPosting.getToLocation());
+            rideDate.setText(currentPosting.getDate());
+            ridePrice.setText(currentPosting.getPrice().toString());
+            seatsAvailable.setText(currentPosting.getAvailableSeats());
+            carModel.setText(currentPosting.getCarModel());
+            carLicensePlate.setText(currentPosting.getLicensePlate());
+            carColor.setText(currentPosting.getCarColor());
+            rideAddComments.setText(currentPosting.getPostDescription());
+        }
+        else{
+            driverInfo.setText("Rider Information");
+
+
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_post_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_post_details, container, false);
+        driverInfo = view.findViewById(R.id.driver_info);
+        driverName = view.findViewById(R.id.driver_name);
+        driverRating = view.findViewById(R.id.driver_rating);
+        pickupLocation = view.findViewById(R.id.pickup_location);
+        dropoffLocation = view.findViewById(R.id.dropoff_location);
+        rideDate = view.findViewById(R.id.ride_date);
+        ridePrice = view.findViewById(R.id.ride_price);
+        seatsAvailable = view.findViewById(R.id.seats_available);
+        carModel = view.findViewById(R.id.car_model);
+        carLicensePlate = view.findViewById(R.id.car_license_plate);
+        carColor = view.findViewById(R.id.car_color);
+        rideAddComments = view.findViewById(R.id.ride_add_comments);
+
+        return view;
+
     }
 }

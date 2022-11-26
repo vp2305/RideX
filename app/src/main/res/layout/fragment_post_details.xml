@@ -15,6 +15,7 @@
         >
 
         <TextView
+            android:id="@+id/driver_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Driver Information"
@@ -44,11 +45,13 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:id="@+id/driver_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vaibhav Patel" />
 
                 <TextView
+                    android:id="@+id/driver_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="⭐ 4.5"/>
@@ -89,6 +92,7 @@
 
             </TextView>
             <TextView
+                android:id="@+id/pickup_location"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Wilfrid Laurier University"
@@ -112,6 +116,7 @@
             </TextView>
 
             <TextView
+                android:id="@+id/dropoff_location"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="6dp"
@@ -135,6 +140,7 @@
 
             </TextView>
             <TextView
+                android:id="@+id/ride_date"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="22nd November, 2022"
@@ -161,6 +167,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/ride_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$25"
@@ -183,6 +190,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/seats_available"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3"
@@ -221,6 +229,7 @@
                     android:text="Model"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/car_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Honda Civic 2021"/>
@@ -237,6 +246,7 @@
                     android:text="License Plate"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/car_license_plate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="WLU CP 470"/>
@@ -253,6 +263,7 @@
                     android:text="Color"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/car_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Blue"/>
@@ -268,6 +279,7 @@
 
         </TextView>
         <TextView
+            android:id="@+id/ride_add_comments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Some Big ASS Comment"

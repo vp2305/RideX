@@ -168,7 +168,11 @@ public class ChatWindowFragment extends Fragment {
                         @Override
                         public void onSuccess() {
                             inputMessage.setText("");
-                            chatRecyclerView.smoothScrollToPosition(messagesRealmAdapter.getItemCount() - 1);
+                            try {
+                                chatRecyclerView.smoothScrollToPosition(messagesRealmAdapter.getItemCount() - 1);
+                            } catch (Exception e) {
+                                displayMessages(allMessages);
+                            }
                         }
                     }, new Realm.Transaction.OnError() {
                         @Override
@@ -187,12 +191,14 @@ public class ChatWindowFragment extends Fragment {
 
     public void displayMessages(RealmResults<Messages> messages){
         Log.i(ACTIVITY_NAME, "displayMessages()");
-        messagesRealmAdapter=
-                new MessagesRealmAdapter(getContext(), messages, app.currentUser().getId());
-        chatRecyclerView.setAdapter(messagesRealmAdapter);
-        chatRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        chatRecyclerView.smoothScrollToPosition(messagesRealmAdapter.getItemCount() - 1);
-        messagesRealmAdapter.notifyDataSetChanged();
+        if (messages.size() != 0){
+            messagesRealmAdapter=
+                    new MessagesRealmAdapter(getContext(), messages, app.currentUser().getId());
+            chatRecyclerView.setAdapter(messagesRealmAdapter);
+            chatRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            chatRecyclerView.smoothScrollToPosition(messagesRealmAdapter.getItemCount() - 1);
+            messagesRealmAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

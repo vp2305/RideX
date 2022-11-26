@@ -8,15 +8,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.ridex.models.ChatRoom;
 import com.example.ridex.models.Posts;
 import com.example.ridex.models.Users;
 
 import org.bson.types.ObjectId;
 
 import io.realm.Realm;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 
@@ -36,10 +41,25 @@ public class PostDetailsFragment extends Fragment {
     Realm realm;
     Posts currentPosting;
     Users posterUser;
+    ChatRoom chatRoom, newChatRoom;
+    String posterUID;
     LinearLayout priceLayout, carDetailsLayout;
     App app;
     String postId = "";
-    TextView driverInfo, driverName, driverRating, pickupLocation, dropoffLocation, rideDate, ridePrice, seatsAvailable, carModel, carLicensePlate, carColor, rideAddComments, seatsAvailableText;
+    TextView driverInfo,
+            driverName,
+            driverRating,
+            pickupLocation,
+            dropoffLocation,
+            rideDate,
+            ridePrice,
+            seatsAvailable,
+            carModel,
+            carLicensePlate,
+            carColor,
+            rideAddComments,
+            seatsAvailableText;
+    Button messageBtn;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -49,15 +69,6 @@ public class PostDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PostDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PostDetailsFragment newInstance(String param1, String param2) {
         PostDetailsFragment fragment = new PostDetailsFragment();
         Bundle args = new Bundle();
@@ -79,8 +90,10 @@ public class PostDetailsFragment extends Fragment {
             postId = getArguments().getString("postId");
         }
         Log.i(ACTIVITY_NAME, "PostID: " +postId);
-        currentPosting = realm.where(Posts.class).equalTo("_id", new ObjectId(postId)).findFirst();
-        posterUser = realm.where(Users.class).equalTo("uid", currentPosting.getPosterUID()).findFirst();
+        currentPosting = realm.where(Posts.class)
+                .equalTo("_id", new ObjectId(postId)).findFirst();
+        posterUser = realm.where(Users.class)
+                .equalTo("uid", currentPosting.getPosterUID()).findFirst();
         app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
     }
 
@@ -104,12 +117,14 @@ public class PostDetailsFragment extends Fragment {
         priceLayout = view.findViewById(R.id.price_layout);
         seatsAvailableText = view.findViewById(R.id.seats_available_text);
         carDetailsLayout = view.findViewById(R.id.car_details_layout);
+        messageBtn = view.findViewById(R.id.messageBtn);
 
         if (currentPosting.getPostedAs().equals("Driver")){
             //driverName.setText(currentPosting.get);
             Log.i(ACTIVITY_NAME, String.valueOf(currentPosting));
             //driverRating
-            driverName.setText(String.format("%s %s",posterUser.getFirstName(),posterUser.getLastName()));
+            driverName.setText(String.format("%s %s",
+                    posterUser.getFirstName(),posterUser.getLastName()));
             driverRating.setText("⭐" + String.valueOf(posterUser.getOverAllReview()));
             pickupLocation.setText(currentPosting.getFromLocation());
             dropoffLocation.setText(currentPosting.getToLocation());
@@ -123,7 +138,8 @@ public class PostDetailsFragment extends Fragment {
         }
         else{
             driverInfo.setText("Rider Information");
-            driverName.setText(String.format("%s %s",posterUser.getFirstName(),posterUser.getLastName()));
+            driverName.setText(String.format("%s %s",
+                    posterUser.getFirstName(),posterUser.getLastName()));
             driverRating.setText("⭐" + String.valueOf(posterUser.getOverAllReview()));
             pickupLocation.setText(currentPosting.getFromLocation());
             dropoffLocation.setText(currentPosting.getToLocation());
@@ -133,12 +149,80 @@ public class PostDetailsFragment extends Fragment {
             seatsAvailable.setText(String.valueOf(currentPosting.getNumberOfSeats()));
             carDetailsLayout.setVisibility(View.GONE);
             rideAddComments.setText(currentPosting.getPostDescription());
-
-
-
         }
+
+        posterUID = currentPosting.getPosterUID();
+
+
+        messageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // User clicked on the message.
+                // Check if the chatroom already exists with the two user.
+                if (!posterUID.equals(app.currentUser().getId())){
+                    chatRoom = realm.where(ChatRoom.class)
+                            .equalTo("userOneUID", app.currentUser().getId())
+                            .and()
+                            .equalTo("userTwoUID", posterUser.getUid())
+                            .or()
+                            .equalTo("userOneUID", posterUser.getUid())
+                            .and()
+                            .equalTo("userTwoUID", app.currentUser().getId())
+                            .findFirst();
+
+                    Log.i(ACTIVITY_NAME, String.valueOf(chatRoom));
+                    if (chatRoom == null){
+                        // there is no chatRoom for the two users!
+                        realm.executeTransactionAsync(r -> {
+                            ChatRoom newChatRoom = r.createObject(ChatRoom.class, new ObjectId());
+                            RealmList<String> messages = new RealmList<>();
+                            messages.add("63829531a7f68278c574b688");
+                            newChatRoom.setMessages(messages);
+                            newChatRoom.setUserOneUID(posterUID);
+                            newChatRoom.setUserTwoUID(app.currentUser().getId());
+                        }, new Realm.Transaction.OnSuccess() {
+                            @Override
+                            public void onSuccess() {
+                                Log.i(ACTIVITY_NAME, "Successfully created chatroom!");
+                                newChatRoom = realm.where(ChatRoom.class)
+                                        .equalTo("userOneUID", app.currentUser().getId())
+                                        .and()
+                                        .equalTo("userTwoUID", posterUser.getUid())
+                                        .or()
+                                        .equalTo("userOneUID", posterUser.getUid())
+                                        .and()
+                                        .equalTo("userTwoUID", app.currentUser().getId())
+                                        .findFirst();
+                                sendUserToMessageRoom(newChatRoom.getId().toString());
+                            }
+                        }, new Realm.Transaction.OnError() {
+                            @Override
+                            public void onError(Throwable error) {
+                                Log.i(ACTIVITY_NAME, "Unable to make a chatroom!");
+                                Log.i(ACTIVITY_NAME, "Error: "+ error);
+                            }
+                        });
+                    } else {
+                        sendUserToMessageRoom(chatRoom.getId().toString());
+                    }
+                } else {
+                    Toast.makeText(getContext(), "This is your post!", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
 
         return view;
 
+    }
+
+    public void sendUserToMessageRoom(String chatRoomId){
+        Bundle bundle = new Bundle();
+        bundle.putString("chatRoomID", chatRoomId);
+        bundle.putString("senderName", String.format("%s %s",
+                posterUser.getFirstName(),posterUser.getLastName()));
+        ChatWindowFragment chatWindowFragment = new ChatWindowFragment();
+        chatWindowFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.frameLayout, chatWindowFragment).commit();
     }
 }

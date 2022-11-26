@@ -51,6 +51,8 @@
                             android:paddingEnd="10dp"
                             android:textColor="@color/black"
                             android:padding="5dp"
+                            android:hint="eg. Waterloo ON"
+                            android:textColorHint="#51000000"
                             android:background="@drawable/accent_input_text_select"/>
 
                         <TextView
@@ -68,6 +70,8 @@
                             android:ems="10"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
+                            android:hint="eg. Toronto ON"
+                            android:textColorHint="#51000000"
                             android:textColor="@color/black"
                             android:inputType="textPersonName"
                             android:padding="5dp"
@@ -102,6 +106,7 @@
                             android:layout_height="48dp"
                             android:ems="10"
                             android:inputType="textPersonName"
+                            android:textColorHint="#51000000"
                             android:textColor="@color/black"
                             android:padding="5dp"
                             android:background="@drawable/accent_input_text_select"

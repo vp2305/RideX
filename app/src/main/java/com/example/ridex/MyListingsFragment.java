@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 
 import com.example.ridex.models.Posts;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -26,6 +29,9 @@ public class MyListingsFragment extends Fragment {
     App app;
     Realm realm;
     RealmResults<Posts> myPostings;
+    BottomNavigationView menu;
+    FrameLayout frameLayout;
+    ImageButton backImage;
 
     public MyListingsFragment() {
         // Required empty public constructor
@@ -44,6 +50,13 @@ public class MyListingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_listings, container, false);
 
+        //get fields
+        menu = getActivity().findViewById(R.id.bottomNavigation);
+        frameLayout = getActivity().findViewById(R.id.frameLayout);
+        backImage = view.findViewById(R.id.backImage);
+
+        menu.setVisibility(View.GONE);
+
         myListingsRecyclerView = view.findViewById(R.id.myListingsRecyclerView);
 
         myPostings = realm.where(Posts.class)
@@ -57,6 +70,14 @@ public class MyListingsFragment extends Fragment {
         } else {
             displayPostingViews(myPostings);
         }
+
+        backImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout, new AccountPageFragment()).commit();
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -73,5 +94,11 @@ public class MyListingsFragment extends Fragment {
                 "No postings for the search!");
         myListingsRecyclerView.setAdapter(emptyPostingAdapter);
         myListingsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        menu.setVisibility(View.VISIBLE);
     }
 }

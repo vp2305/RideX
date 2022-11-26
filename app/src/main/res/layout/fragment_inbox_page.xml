@@ -3,57 +3,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyListingsFragment">
+    tools:context=".InboxPageFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <!--for "Search" text-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/backImage"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:padding="8dp"
-                    android:background="@drawable/transparent_drawable"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_back"
-                    android:layout_marginRight="10dp"
-                    />
-
+                >
                 <TextView
                     android:id="@+id/search_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textSize="25sp"
-                    android:text="My Listings"
-                    android:layout_gravity="top"
+                    android:text="My Inbox"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/yourRoute_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:text="personal messages"
+                    android:textColor="#6B000000"
                     android:layout_weight="1"
                     />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myListingsRecyclerView"
+                android:id="@+id/messagesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
     </ScrollView>
+
 
 </FrameLayout>

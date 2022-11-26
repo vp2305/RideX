@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SearchFragment());
                     break;
                 case R.id.inbox:
-                    replaceFragment(new ChatWindowFragment());
+                    replaceFragment(new InboxPageFragment());
                     break;
             }
 
@@ -91,11 +91,10 @@ public class MainActivity extends AppCompatActivity {
                                 // Add a subscription with a name
                                 subscriptions.addOrUpdate(Subscription.create("userQuery",
                                         realm.where(Users.class)
-                                                .equalTo("uid", app.currentUser().getId())
                                 ));
                                 subscriptions.addOrUpdate(Subscription.create("postsQuery",
                                         realm.where(Posts.class)));
-                                subscriptions.addOrUpdate(Subscription.create("messagesQuery",
+                                subscriptions.addOrUpdate(Subscription.create("messageQuery",
                                         realm.where(Messages.class)));
                                 subscriptions.addOrUpdate(Subscription.create("chatRoomQuery",
                                         realm.where(ChatRoom.class)));

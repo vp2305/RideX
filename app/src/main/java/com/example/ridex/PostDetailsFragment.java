@@ -164,7 +164,7 @@ public class PostDetailsFragment extends Fragment {
             });
         } else {
             deletePosting.setVisibility(View.GONE);
-            if (currentPosting.getAvailableSeats() != 0){
+            if (currentPosting.getAvailableSeats() != null && currentPosting.getAvailableSeats() != 0){
                 confirmRideBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

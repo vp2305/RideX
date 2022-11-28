@@ -210,7 +210,8 @@
             android:id="@+id/car_details_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -283,23 +284,31 @@
 
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Additional Comments"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical"
+            android:id="@+id/additionalComments"
+            android:layout_marginBottom="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Additional Comments"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                >
+            </TextView>
+            <TextView
+                android:id="@+id/ride_add_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Comments"
+                android:layout_marginTop="10dp">
+            </TextView>
 
-        </TextView>
-        <TextView
-            android:id="@+id/ride_add_comments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No Comments"
-            android:layout_marginTop="10dp">
+        </LinearLayout>
 
-        </TextView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -307,13 +316,24 @@
             >
 
             <Button
+                android:id="@+id/confirmRideBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirm Ride"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"/>
+                />
+
+            <Button
+                android:id="@+id/deletePosting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Posting"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_gravity="center_horizontal"
+                />
 
         </LinearLayout>
 

@@ -15,6 +15,7 @@ public class MongoDb extends Application {
     public final static String mongoClient = "mongodb-atlas";
     public final static String databaseName = "rideX";
     public final static String usersCollection = "Users";
+    public final static String postsCollection = "Posts";
     public final static String realmName = "rideX.realm";
     private static final String REALM_TAG = "__REALM__";
 

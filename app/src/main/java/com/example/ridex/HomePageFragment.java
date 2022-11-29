@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavType;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,14 +17,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ridex.models.ChatRoom;
+import com.example.ridex.models.Posts;
 import com.example.ridex.models.Users;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmObjectChangeListener;
+import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.sync.SyncConfiguration;
@@ -40,13 +51,14 @@ public class HomePageFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private final static String ACTIVITY_NAME = "HomePageFragment";
 
-
     // Ui variables
     TextView greetingText;
     ImageButton profileBtn;
     Button searchBtn;
     BottomNavigationView menu;
     EditText fromEditText, toEditText;
+    LinearLayout activeListingLayout;
+    RecyclerView activeListingLayoutRecyclerView;
 
     //Data
     String fromLocation, toLocation;
@@ -92,22 +104,7 @@ public class HomePageFragment extends Fragment {
         Log.i(ACTIVITY_NAME, "onCreate()");
 
         app = new App(new AppConfiguration.Builder(MongoDb.appId).build());
-//        configuration =
-//                new SyncConfiguration.Builder(app.currentUser())
-//                        .initialSubscriptions(new SyncConfiguration.InitialFlexibleSyncSubscriptions() {
-//                            @Override
-//                            public void configure(@NonNull Realm realm,
-//                                                  @NonNull MutableSubscriptionSet subscriptions) {
-//                                // Add a subscription with a name
-//                                subscriptions.addOrUpdate(Subscription.create("userQuery",
-//                                        realm.where(user.class)
-//                                                .equalTo("uid", app.currentUser().getId())
-//                                ));
-//                            }
-//                        })
-//                        .build();
         realm = MainActivity.getRealm(getActivity());
-//        realm = Realm.getInstance(configuration);
         currUsersInfo = realm.where(Users.class)
                 .equalTo("uid", app.currentUser().getId()).findFirst();
         Log.i(ACTIVITY_NAME, String.valueOf(currUsersInfo));
@@ -127,6 +124,8 @@ public class HomePageFragment extends Fragment {
         menu = getActivity().findViewById(R.id.bottomNavigation);
         fromEditText = view.findViewById(R.id.from_edit_text);
         toEditText = view.findViewById(R.id.to_edit_text);
+        activeListingLayout = view.findViewById(R.id.confirmedListingsLayout);
+        activeListingLayoutRecyclerView = view.findViewById(R.id.confirmedListingRecyclerView);
         // End of all the field collection
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -190,8 +189,34 @@ public class HomePageFragment extends Fragment {
                 currUsersInfo.getFirstName().replace(" ", ""),
                 currUsersInfo.getLastName().replace(" ", "")));
 
+//        displayConfirmedListings();
+
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void displayConfirmedListings(){
+        if (!currUsersInfo.getConfirmedRide().get(0).equals("")){
+            activeListingLayout.setVisibility(View.VISIBLE);
+            confirmedListings();
+        }
+    }
+
+    public void confirmedListings(){
+        RealmList<Posts> confirmedPosts = new RealmList<>();
+
+        for (int i = 0; i < currUsersInfo.getConfirmedRide().size(); i++){
+            String confirmedPostIdString = currUsersInfo.getConfirmedRide().get(i);
+            Posts post_confirmed = realm.where(Posts.class)
+                    .equalTo("_id", new ObjectId(confirmedPostIdString)).findFirst();
+            confirmedPosts.add(i, post_confirmed);
+        }
+
+        ConfirmedRideRealmAdapter confirmedRideRealmAdapter =
+                new ConfirmedRideRealmAdapter(getContext(), realm, confirmedPosts);
+        activeListingLayoutRecyclerView.setAdapter(confirmedRideRealmAdapter);
+        activeListingLayoutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        confirmedRideRealmAdapter.notifyDataSetChanged();
     }
 
     @Override

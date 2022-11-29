@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ridex.models.Posts;
+import com.example.ridex.models.Users;
 
 import org.bson.types.ObjectId;
 
@@ -129,10 +130,14 @@ public class DriverCreatePostingFragment extends Fragment {
                     realm.executeTransactionAsync(r -> {
                         RealmList<String> confirmedUsersList = new RealmList<>();
                         confirmedUsersList.add("");
+                        ObjectId postId = new ObjectId();
                         Posts driverPost = r.createObject(
                                 Posts.class,
-                                new ObjectId()
+                                postId
                         );
+                        Users currUser = r.where(Users.class)
+                                .equalTo("uid", app.currentUser().getId()).findFirst();
+
                         driverPost.setPostedAs("Driver");
                         driverPost.setPostStatus("Active");
                         driverPost.setPosterUID(app.currentUser().getId());
@@ -151,6 +156,12 @@ public class DriverCreatePostingFragment extends Fragment {
                         driverPost.setCarColor(carColor.getText().toString());
                         driverPost.setCarYear(carYear.getText().toString());
                         driverPost.setLicensePlate(licensePlate.getText().toString());
+
+                        if (currUser.getConfirmedRide().get(0).equals("")){
+                            currUser.getConfirmedRide().set(0, postId.toString());
+                        }else {
+                            currUser.getConfirmedRide().add(postId.toString());
+                        }
 
                     }, new Realm.Transaction.OnSuccess() {
                         @Override

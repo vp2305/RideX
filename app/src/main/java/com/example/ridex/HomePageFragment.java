@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObjectChangeListener;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -155,16 +156,6 @@ public class HomePageFragment extends Fragment {
         userListener = (changedUser, changeSet) -> {
             if (changeSet.isDeleted()){
                 Log.i(ACTIVITY_NAME, "User is deleted!");
-                Toast.makeText(view.getContext(),
-                        "There is seems to be some problem with your account!",
-                        Toast.LENGTH_SHORT).show();
-                app.currentUser().logOutAsync(result -> {
-                    if (result.isSuccess()){
-                        Intent intent = new Intent(getActivity(),
-                                LoginActivity.class);
-                        startActivity(intent);
-                    }
-                });
             }
 
             for (String fieldName : changeSet.getChangedFields()){
@@ -179,6 +170,9 @@ public class HomePageFragment extends Fragment {
                     case "email":
                         Log.i(ACTIVITY_NAME, "Email is changed!");
                         break;
+                    case "confirmedRide":
+                        displayConfirmedListings();
+                        break;
                     default:
                         break;
                 }
@@ -189,7 +183,7 @@ public class HomePageFragment extends Fragment {
                 currUsersInfo.getFirstName().replace(" ", ""),
                 currUsersInfo.getLastName().replace(" ", "")));
 
-//        displayConfirmedListings();
+        displayConfirmedListings();
 
         // Inflate the layout for this fragment
         return view;
@@ -203,17 +197,23 @@ public class HomePageFragment extends Fragment {
     }
 
     public void confirmedListings(){
-        RealmList<Posts> confirmedPosts = new RealmList<>();
+        RealmQuery<Posts> query = realm.where(Posts.class);
 
-        for (int i = 0; i < currUsersInfo.getConfirmedRide().size(); i++){
-            String confirmedPostIdString = currUsersInfo.getConfirmedRide().get(i);
-            Posts post_confirmed = realm.where(Posts.class)
-                    .equalTo("_id", new ObjectId(confirmedPostIdString)).findFirst();
-            confirmedPosts.add(i, post_confirmed);
+        if (currUsersInfo.getConfirmedRide().size() > 1){
+            for (int i = 0; i < currUsersInfo.getConfirmedRide().size(); i++){
+                String confirmedPostIdString = currUsersInfo.getConfirmedRide().get(i);
+                query = query.equalTo("_id", new ObjectId(confirmedPostIdString)).or();
+            }
+        } else {
+            String confirmedPostIdString = currUsersInfo.getConfirmedRide().get(0);
+            query = query.equalTo("_id", new ObjectId(confirmedPostIdString));
         }
 
+
+        RealmResults<Posts> allConfirmedPosts = query.findAll();
+
         ConfirmedRideRealmAdapter confirmedRideRealmAdapter =
-                new ConfirmedRideRealmAdapter(getContext(), realm, confirmedPosts);
+                new ConfirmedRideRealmAdapter(getContext(), realm, allConfirmedPosts);
         activeListingLayoutRecyclerView.setAdapter(confirmedRideRealmAdapter);
         activeListingLayoutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         confirmedRideRealmAdapter.notifyDataSetChanged();

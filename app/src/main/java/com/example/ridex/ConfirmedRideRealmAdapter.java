@@ -22,6 +22,7 @@ import org.bson.types.ObjectId;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class ConfirmedRideRealmAdapter
         extends RealmRecyclerViewAdapter<Posts,
@@ -29,10 +30,10 @@ public class ConfirmedRideRealmAdapter
     public static final String ACTIVITY_NAME = "InboxRealmAdapter";
 
     Context context;
-    RealmList<Posts> confirmedRidePosts;
+    RealmResults<Posts> confirmedRidePosts;
     Realm realm;
 
-    public ConfirmedRideRealmAdapter(Context context_taken, Realm realm_taken, RealmList<Posts> confirmedRidePosts_taken){
+    public ConfirmedRideRealmAdapter(Context context_taken, Realm realm_taken, RealmResults<Posts> confirmedRidePosts_taken){
         super(confirmedRidePosts_taken, true);
         context = context_taken;
         realm = realm_taken;
@@ -56,11 +57,11 @@ public class ConfirmedRideRealmAdapter
         holder.date_time.setText(String.format("%s · %s",
                 confirmedRidePosts.get(position).getDate(),
                 confirmedRidePosts.get(position).getTime()));
-        holder.seats_available.setText(String.valueOf(confirmedRidePosts
+        holder.seats_available.setText("Number of Seats: " + String.valueOf(confirmedRidePosts
                 .get(position).getNumberOfSeats()));
-        holder.driver_name.setText(String.format("%s %s", driverUser.getFirstName(),
+        holder.driver_name.setText(String.format("Driver: %s %s", driverUser.getFirstName(),
                 driverUser.getLastName()));
-        holder.car_info.setText(String.format("%s %s",
+        holder.car_info.setText(String.format("Car: %s %s",
                 confirmedRidePosts.get(position).getCarModel(),
                 confirmedRidePosts.get(position).getCarYear()));
         holder.destination_name.setText(confirmedRidePosts.get(position).getToLocation());

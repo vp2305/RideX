@@ -26,6 +26,11 @@ import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 
+/**
+ Class Description:
+ This class will collect data to display on the inbox page
+ */
+
 public class InboxRealmAdapter
         extends RealmRecyclerViewAdapter<ChatRoom,
         InboxRealmAdapter.MyViewHolder> {

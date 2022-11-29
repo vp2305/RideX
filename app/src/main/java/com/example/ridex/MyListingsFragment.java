@@ -21,6 +21,11 @@ import io.realm.Sort;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 
+/**
+ Class Description:
+ This class will save all the listings that are created by the user
+ */
+
 public class MyListingsFragment extends Fragment {
     public static final String ACTIVITY_NAME = "MyListingsFragment";
     // UI

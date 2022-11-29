@@ -24,6 +24,11 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
+/**
+ Class Description:
+ This class will add the confirmed ride to the list of confirmed rides in the database
+ */
+
 public class ConfirmedRideRealmAdapter
         extends RealmRecyclerViewAdapter<Posts,
         ConfirmedRideRealmAdapter.MyViewHolder> {

@@ -26,6 +26,11 @@ import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
 
+/**
+ Class Description:
+ This class will allow the user to sign up
+ */
+
 public class SignUpActivity extends AppCompatActivity {
     private final static String ACTIVITY_NAME = "SignUpActivity";
 

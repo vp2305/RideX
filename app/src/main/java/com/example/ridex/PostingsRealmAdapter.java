@@ -25,6 +25,11 @@ import java.util.zip.Inflater;
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmResults;
 
+/**
+ Class Description:
+ This class will save the post details in the database
+ */
+
 public class PostingsRealmAdapter
         extends RealmRecyclerViewAdapter<Posts,
         PostingsRealmAdapter.MyViewHolder> {
@@ -70,10 +75,7 @@ public class PostingsRealmAdapter
                 bundle.putString("postId", postID);
                 PostDetailsFragment postDetailsFragment = new PostDetailsFragment();
                 postDetailsFragment.setArguments(bundle);
-                //getFragmentManager().beginTransaction().replace(R.id.frameLayout, postDetailsFragment).commit();
-//                FragmentManager fragmentManager =
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.frameLayout, new PostDetailsFragment()).commit();
+
                 ((FragmentActivity) view.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, postDetailsFragment).commit();
             }
         });

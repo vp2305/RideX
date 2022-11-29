@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blue"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:text="How many seats do\nyou need?"
             android:gravity="left|center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_marginRight="10dp"
             />
 
@@ -30,7 +30,7 @@
             android:ems="11"
             android:padding="5dp"
             android:textColor="@color/black"
-            android:background="@drawable/accent_input_text_select"
+            android:background="@drawable/input_text_select"
             android:inputType="textPersonName"
             android:text="" />
     </LinearLayout>

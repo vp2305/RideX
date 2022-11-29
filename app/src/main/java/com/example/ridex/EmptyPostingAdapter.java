@@ -9,6 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ Class Description:
+ To display when there are no posts available to display
+ */
+
 public class EmptyPostingAdapter extends RecyclerView.Adapter<EmptyPostingAdapter.MyViewHolder> {
 
     Context context;

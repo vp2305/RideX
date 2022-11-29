@@ -28,7 +28,10 @@ import io.realm.mongodb.sync.Subscription;
 import io.realm.mongodb.sync.SyncConfiguration;
 import io.realm.mongodb.sync.SyncSession;
 
-// https://stackoverflow.com/questions/44331742/how-to-manage-realm-instance
+/**
+ Class Description:
+ This class will allow the user to navigate through multiple fragments in the menubar
+ */
 
 public class MainActivity extends AppCompatActivity {
     private static final String ACTIVITY_NAME = "MainActivity";
@@ -38,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     Realm realm;
     App app;
     SyncConfiguration configuration;
-
     ActivityMainBinding binding;
 
     @Override
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomePageFragment());
 
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
-
+            //change fragments depending on menubar
             switch (item.getItemId()){
                 case R.id.home:
                     replaceFragment(new HomePageFragment());
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         realm = Realm.getInstance(configuration);
     }
 
+    //to change fragments
     public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

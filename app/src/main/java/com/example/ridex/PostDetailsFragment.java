@@ -34,14 +34,13 @@ import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link PostDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ Class Description:
+ This class will display the details of the post
  */
+
 public class PostDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ACTIVITY_NAME = "PostDetailsFragment";
@@ -171,11 +170,12 @@ public class PostDetailsFragment extends Fragment {
                         LayoutInflater inflater = getActivity().getLayoutInflater();
                         final View view = inflater.inflate(R.layout.custom_dialog, null);
 
-                        final AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                        final AlertDialog dialog = new AlertDialog.Builder(requireContext(), AlertDialog.THEME_HOLO_LIGHT)
                                 .setView(view)
                                 .setTitle("Confirm Ride")
                                 .setPositiveButton("Confirm", null) //Set to null. We override the onclick
                                 .setNegativeButton(android.R.string.cancel, null)
+
                                 .create();
 
                         dialog.setOnShowListener(new DialogInterface.OnShowListener() {

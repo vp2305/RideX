@@ -33,9 +33,8 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChatWindowFragment#newInstance} factory method to
- * create an instance of this fragment.
+Class Description:
+ This class will open up the chatroom with another user. It will load all the previous messages and send new messages.
  */
 public class ChatWindowFragment extends Fragment {
 
@@ -75,15 +74,7 @@ public class ChatWindowFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatWindowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ChatWindowFragment newInstance(String param1, String param2) {
         ChatWindowFragment fragment = new ChatWindowFragment();
         Bundle args = new Bundle();

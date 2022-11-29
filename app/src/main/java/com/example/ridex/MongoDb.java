@@ -9,6 +9,11 @@ import androidx.annotation.NonNull;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
+/**
+ Class Description:
+ This class is to connect the Mongo Database
+ */
+
 public class MongoDb extends Application {
     private final static String ACTIVITY_NAME="MongoDb";
     public final static String appId = "ridex-application-endzs";
@@ -25,9 +30,6 @@ public class MongoDb extends Application {
     // Download via realm-cli: realm-cli pull --remote ridex-application-endzs --template kotlin.todo.flex
     // Follow README: RideX-Application/frontend/kotlin.todo.flex/README.md
 
-    // This is for opening a realm
-    // RealmConfiguration config = new RealmConfiguration.Builder().name(MongoDb.realmName).build();
-    // Realm backgroundThreadRealm = Realm.getInstance(config);
 
     @Override
     public void onCreate() {
@@ -39,18 +41,7 @@ public class MongoDb extends Application {
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 
-//    public static Realm getRealm(Context context) {
-//        // noinspection ResourceType
-//        return (Realm)context.getSystemService(REALM_TAG);
-//    }
-//
-//    @Override
-//    public Object getSystemService(@NonNull String name) {
-//        if(REALM_TAG.equals(name)) {
-//            return realm;
-//        }
-//        return super.getSystemService(name);
-//    }
+
 
     @Override
     public void onLowMemory() {

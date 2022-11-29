@@ -22,6 +22,10 @@ import org.bson.types.ObjectId;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+/**
+ Class Description:
+ This class will contain information for each message in the inbox
+ */
 
 public class MessagesRealmAdapter
         extends RealmRecyclerViewAdapter<Messages,

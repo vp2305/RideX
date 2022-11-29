@@ -22,6 +22,11 @@ import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.User;
 
+/**
+ Class Description:
+ This will be the first thing that opens when a new user opens the app. It allows a swiping feture for the user
+ */
+
 public class LandingPageActivity extends AppCompatActivity {
 
     private static final String ACTIVITY_NAME = "LandingPageActivity";
@@ -75,13 +80,7 @@ public class LandingPageActivity extends AppCompatActivity {
             }
         });
 
-//        getStartedBtn.setVisibility(View.GONE);
-//        getStartedBtn.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getStartedBtn.setVisibility(View.VISIBLE);
-//            }
-//        },500);
+
 
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override

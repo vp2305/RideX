@@ -24,6 +24,11 @@ import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
 
+/**
+ Class Description:
+ This class allows the user to login
+ */
+
 public class LoginActivity extends AppCompatActivity {
     private final static String ACTIVITY_NAME = "LoginActivity";
     EditText emailInput, passInput;
@@ -59,17 +64,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     assert user != null;
                     Log.i(ACTIVITY_NAME, "User: " + user.getProfile());
-//                    Toast.makeText(getApplicationContext(), "Successfully authenticated!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    //Toast.makeText(getApplicationContext(), "Invalid password or email address. Please try again!", Toast.LENGTH_SHORT).show();
                     snackbar.make(view, "Invalid password or email address. Please try again!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
             });
         } else {
-            //Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
             snackbar.make(view, "Email or password cannot be empty!", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }

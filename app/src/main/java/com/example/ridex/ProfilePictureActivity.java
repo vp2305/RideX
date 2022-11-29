@@ -37,6 +37,11 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
+/**
+ Class Description:
+ This class will allow the user to set up a profile picture when signing up
+ */
+
 public class ProfilePictureActivity extends AppCompatActivity {
     private final static String ACTIVITY_NAME = "ProfilePictureActivity";
     PreviewView previewView;

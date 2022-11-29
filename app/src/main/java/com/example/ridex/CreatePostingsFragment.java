@@ -32,10 +32,10 @@ import io.realm.mongodb.sync.SyncConfiguration;
 import io.realm.mongodb.sync.SyncSession;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreatePostingsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ Class Description:
+ This class will be used to select whether user wants to create a posting as a rider or a driver
  */
+
 public class CreatePostingsFragment extends Fragment {
     private static final String ACTIVITY_NAME = "CreatePostingsFragment";
     private static final String REALM_TAG = "__REALM__";
@@ -58,15 +58,6 @@ public class CreatePostingsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreatePostingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static CreatePostingsFragment newInstance(String param1, String param2) {
         CreatePostingsFragment fragment = new CreatePostingsFragment();
         Bundle args = new Bundle();

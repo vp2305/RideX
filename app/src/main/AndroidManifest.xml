@@ -18,13 +18,6 @@
         android:theme="@style/Theme.RideX.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".AccountActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".LandingPageActivity"
             android:exported="true">
             <intent-filter>
@@ -66,9 +59,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".HomePageActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

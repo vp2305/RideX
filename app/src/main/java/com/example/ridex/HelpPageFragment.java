@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link HelpPageFragment#newInstance} factory method to
- * create an instance of this fragment.
+ Class Description:
+ This class will show the authors and instructions on how to use the interface
  */
+
+
 public class HelpPageFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -28,15 +29,7 @@ public class HelpPageFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HelpPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static HelpPageFragment newInstance(String param1, String param2) {
         HelpPageFragment fragment = new HelpPageFragment();
         Bundle args = new Bundle();

@@ -21,6 +21,11 @@ import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 
+/**
+ Class Description:
+ This class will show all the users you have messages with. You can access the chatrooms from here.
+ */
+
 public class InboxPageFragment extends Fragment {
     private static final String ACTIVITY_NAME = "InboxPageFragment";
     // UI variables

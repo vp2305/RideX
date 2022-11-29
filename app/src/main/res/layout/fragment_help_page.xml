@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".HelpPageFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
         >
     <!-- TODO: Update blank fragment layout -->
         <TextView
@@ -17,6 +22,9 @@
             android:layout_height="wrap_content"
             android:text="@string/help_authors"
             android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"
+
             />
 
         <TextView
@@ -55,23 +63,36 @@
             android:layout_gravity="center"/>
 
 
-        <TextView
-            android:id="@+id/instructions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dhwani"
-            android:layout_gravity="center"/>
-
 
         <TextView
             android:id="@+id/activity_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_version"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            />
+
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/instructions"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/interface_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interface_info"
+            android:singleLine="false"
+            />
 
 
     </LinearLayout>
 
 
-</FrameLayout>
+</ScrollView>

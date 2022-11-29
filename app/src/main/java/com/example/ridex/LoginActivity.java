@@ -3,12 +3,15 @@ package com.example.ridex;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private final static String ACTIVITY_NAME = "LoginActivity";
     EditText emailInput, passInput;
     Button signInBtn, signInWithGoogleBtn;
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,15 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Invalid password or email address. Please try again!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Invalid password or email address. Please try again!", Toast.LENGTH_SHORT).show();
+                    snackbar.make(view, "Invalid password or email address. Please try again!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
             });
         } else {
-            Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Email or password cannot be empty!", Toast.LENGTH_SHORT).show();
+            snackbar.make(view, "Email or password cannot be empty!", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 

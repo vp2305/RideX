@@ -216,7 +216,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Confirmed Listings"
+                        android:text="Confirmed Rides"
                         android:textSize="17sp"
                         >
                     </TextView>

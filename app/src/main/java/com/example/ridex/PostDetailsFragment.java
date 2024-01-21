@@ -65,7 +65,8 @@ public class PostDetailsFragment extends Fragment {
             carLicensePlate,
             carColor,
             rideAddComments,
-            seatsAvailableText;
+            seatsAvailableText,
+            ride_time;
     Button messageBtn, confirmRideBtn, deletePosting;
 
     // TODO: Rename and change types of parameters
@@ -128,6 +129,7 @@ public class PostDetailsFragment extends Fragment {
         messageBtn = view.findViewById(R.id.messageBtn);
         confirmRideBtn = view.findViewById(R.id.confirmRideBtn);
         deletePosting = view.findViewById(R.id.deletePosting);
+        ride_time = view.findViewById(R.id.ride_time);
         posterUID = currentPosting.getPosterUID();
 
 
@@ -321,6 +323,7 @@ public class PostDetailsFragment extends Fragment {
             carLicensePlate.setText(currentPosting.getLicensePlate());
             carColor.setText(currentPosting.getCarColor());
             rideAddComments.setText(currentPosting.getPostDescription());
+            ride_time.setText(currentPosting.getTime());
             if (currentPosting.getPostDescription().equals("")){
                 additionalComments.setVisibility(View.GONE);
             }
@@ -333,6 +336,7 @@ public class PostDetailsFragment extends Fragment {
             pickupLocation.setText(currentPosting.getFromLocation());
             dropoffLocation.setText(currentPosting.getToLocation());
             rideDate.setText(currentPosting.getDate());
+            ride_time.setText(currentPosting.getTime());
             priceLayout.setVisibility(View.GONE);
             if (currentPosting.getPostDescription().equals("")){
                 additionalComments.setVisibility(View.GONE);

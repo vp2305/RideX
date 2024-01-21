@@ -30,14 +30,13 @@ public class MongoDb extends Application {
     // Download via realm-cli: realm-cli pull --remote ridex-application-endzs --template kotlin.todo.flex
     // Follow README: RideX-Application/frontend/kotlin.todo.flex/README.md
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         Log.i(ACTIVITY_NAME, "OnCreate()");
         Realm.init(this);
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name(realmName).schemaVersion(1).build();
+                .name(realmName).schemaVersion(2).build();
         Realm.setDefaultConfiguration(realmConfiguration);
     }
 
